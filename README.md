@@ -36,4 +36,4 @@ The statements follow the notes by Prof. Mohamed Amer, which are not included in
 
 ## License
 
-See `LICENSE`.
+See [MIT License](./LICENSE).
