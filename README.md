@@ -42,4 +42,4 @@ The statements follow the notes by Prof. Mohamed Amer, which are not included in
 
 ## License
 
-MIT. See `LICENSE`.
+MIT. See [MIT License](./LICENSE).
