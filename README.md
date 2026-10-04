@@ -9,7 +9,7 @@ The project has no dependencies, not even Mathlib. It defines its own `Set` and 
 - `LogicInduction/Set.lean`: sets as predicates, membership, subset, intersection, difference, `univ`, `range`, and `predR`, which is the notes' `ρ[x]`.
 - `LogicInduction/indN.lean`: Section 1. Peano-like structures and the equivalence of the two induction principles on `N`.
 - `LogicInduction/WellFounded.lean`: Section 2. Well-founded relations, the principle of ρ,A-induction, and the equivalence theorem.
-- `docs/Logic_Induction.pdf`: my written proof of Section 1, which the Lean code follows.
+- `docs/Logic_Induction.pdf`: my written proof of Section 1 & 2, which the Lean code follows.
 
 Each theorem carries a comment with its number in the notes where it has one.
 
