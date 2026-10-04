@@ -6,18 +6,24 @@ The project has no dependencies, not even Mathlib. It defines its own `Set` and 
 
 ## Contents
 
-- `LogicInduction/Set.lean`: sets as predicates, membership, subset, intersection, `univ`, and `predR`, which is the notes' `ρ[x]`.
+- `LogicInduction/Set.lean`: sets as predicates, membership, subset, intersection, difference, `univ`, `range`, and `predR`, which is the notes' `ρ[x]`.
 - `LogicInduction/indN.lean`: Section 1. Peano-like structures and the equivalence of the two induction principles on `N`.
+- `LogicInduction/WellFounded.lean`: Section 2. Well-founded relations, the principle of ρ,A-induction, and the equivalence theorem.
 - `docs/Logic_Induction.pdf`: my written proof of Section 1, which the Lean code follows.
 
-Each theorem carries a comment with its number in the notes.
+Each theorem carries a comment with its number in the notes where it has one.
 
 ## Progress
 
 - [x] Peano-like structures and Theorem 1.5 (the two forms of induction on `N` are equivalent)
-- [ ] Well-founded relations and the principle of ρ,A-induction
-- [ ] Equivalence of well-foundedness, ρ,A-induction, and no infinite descending sequence
-- [ ] Transitive closure: ρ is well-founded iff ρ⁺ is
+- [x] Well-founded relations and the principle of ρ,A-induction
+- [x] Equivalence of well-foundedness, ρ,A-induction, and no infinite descending sequence
+- [x] ρ is well founded iff it is well founded on Rρ
+- [x] ρ,A-induction holds for every A iff it holds for Rρ
+- [ ] The successor relation on `N` is well founded
+- [ ] If σ ⊆ ρ and ρ is well founded, then σ is well founded
+- [ ] Relative product, powers, and transitive closure
+- [ ] ρ is well founded iff ρ⁺ is
 - [ ] Well-orderings
 
 ## Building
@@ -36,4 +42,4 @@ The statements follow the notes by Prof. Mohamed Amer, which are not included in
 
 ## License
 
-See `LICENSE`.
+MIT. See `LICENSE`.
