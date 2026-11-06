@@ -63,4 +63,26 @@ theorem thm13 : prop11 M ↔ prop12 M := by
       have : k = n := h1 hk
       rwa[this]
 
+/-- Recursion theorem, uniqueness part. -/
+theorem recursion_unique {A : Type} (hind : prop11 M) (a : A) (β : N × A → A)
+    (γ δ : N → A)
+    (hγ0 : γ M.z = a) (hγs : ∀ n, γ (M.S n) = β (n, γ n))
+    (hδ0 : δ M.z = a) (hδs : ∀ n, δ (M.S n) = β (n, δ n)) :
+    γ = δ := by
+  funext n
+  let B : Set N := fun k => γ k = δ k
+  have hBu : B = univ := by
+    apply hind B
+    constructor
+    · exact hγ0.trans hδ0.symm
+    · intro k (hk : γ k = δ k)
+      show γ (M.S k) = δ (M.S k)
+      rw [hγs, hδs, hk]
+  have hn : n ∈ B := by
+    rw [hBu]
+    exact mem_univ n
+  exact hn
+
+
+
 end LogicInduction

@@ -1,4 +1,6 @@
 import LogicInduction.Set
+import LogicInduction.Relations
+
 namespace LogicInduction
 open Set
 
@@ -139,6 +141,14 @@ theorem not_wf_imp_closed_set {ρ : X → X → Prop} (h : ¬ WF ρ) :
     obtain ⟨y, hy1, hy2⟩ := hh
     exists y
 
+theorem not_wf_of_closed_set {ρ : X → X → Prop} {B : Set X}
+    (hne : ∃ x, x ∈ B) (hB : ∀ x, x ∈ B → ∃ y, y ∈ B ∧ ρ y x) : ¬ WF ρ := by
+  intro h
+  have ⟨x, hx1, hx2⟩ := h B hne
+  have ⟨y, hy, hyx⟩:= hB x hx1
+  have : y ∈ predR ρ x ∩ B := ⟨hyx, hy⟩
+  rw[hx2] at this
+  contradiction
 
 /-- A step function on B choosing a predecessor. -/
 theorem exists_step {ρ : X → X → Prop} {B : Set X}
@@ -190,11 +200,8 @@ theorem wf_equiv (ρ : X → X → Prop) :
     · exact fun h => ind_imp_no_desc (wf_imp_ind h)
     · exact not_desc_imp_wf
 
-/-- Notes: Rρ, the range of ρ. -/
-def RelRange (ρ : X → X → Prop) : Set X := fun y => ∃ x, ρ x y
-
 /-- Notes: ρ is w.f. on A. -/
-def WFOn (ρ : X → X → Prop) (A : Set X) : Prop :=
+@[simp]def WFOn (ρ : X → X → Prop) (A : Set X) : Prop :=
   ∀ B : Set X, B ⊆ A → (∃ x, x ∈ B) → ∃ x, x ∈ B ∧ predR ρ x ∩ B = ∅
 
 theorem predR_eq_empty_of_not_mem_range {ρ : X → X → Prop} {x : X}
@@ -260,6 +267,30 @@ theorem ind_iff_ind_range (ρ : X → X → Prop) :
     apply (wf_iff_wfOn_range ρ).2
     apply ind_range_imp_wfOn
     assumption
+
+theorem wf_of_sub {σ ρ : X → X → Prop} (hsub : RelSub σ ρ) (hwf : WF ρ) :
+    WF σ := by
+  intro B h
+  have Bwf := hwf B h
+  obtain⟨k, Bwf1, Bwf2⟩ := Bwf
+  exists k
+  constructor
+  · assumption
+  · have : ∀a, a ∈ predR σ k → a ∈ predR ρ k := by
+      intro a ha
+      simp
+      apply hsub
+      assumption
+    apply ext; intro a
+    constructor
+    · intro ha
+      rw[← Bwf2]
+      constructor
+      · apply this
+        exact ha.1
+      · exact ha.2
+    · intro _
+      contradiction
 
 
 end LogicInduction

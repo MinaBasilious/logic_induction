@@ -15,6 +15,7 @@ instance : HasSubset (Set α) := ⟨fun s t => ∀ a, a ∈ s → a ∈ t⟩
 instance : EmptyCollection (Set α) := ⟨fun _ => False⟩
 instance : Inter (Set α) := ⟨fun s t a => a ∈ s ∧ a ∈ t⟩
 instance : SDiff (Set α) := ⟨fun s t a => a ∈ s ∧ ¬ a ∈ t⟩
+instance : Union (Set α) := ⟨fun s t a => a ∈ s ∨ a ∈ t⟩
 
 def range (f : Nat → α) : Set α := fun a => ∃ n, f n = a
 
