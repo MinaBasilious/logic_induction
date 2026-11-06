@@ -1,4 +1,4 @@
-import LogicInduction.indN
+import LogicInduction.IndN
 import LogicInduction.WellFounded
 namespace LogicInduction
 open Set

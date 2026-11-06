@@ -7,15 +7,15 @@ open Set
 variable {X : Type}
 
 /-- Notes: `a` is an infinite descending ρ-sequence. -/
-@[simp]def InfDesc (ρ : X → X → Prop) (a : Nat → X) : Prop :=
+def InfDesc (ρ : X → X → Prop) (a : Nat → X) : Prop :=
   ∀ n, ρ (a (n+1)) (a n)
 
 /-- Notes: ρ is well founded. -/
-@[simp]def WF (ρ : X → X → Prop) : Prop :=
+def WF (ρ : X → X → Prop) : Prop :=
   ∀ B : Set X, (∃ x, x ∈ B) → ∃ x, x ∈ B ∧ predR ρ x ∩ B = ∅
 
 /-- Notes: the principle of ρ,A-induction. -/
-@[simp]def IndPrinciple (ρ : X → X → Prop) (A : Set X) : Prop :=
+def IndPrinciple (ρ : X → X → Prop) (A : Set X) : Prop :=
   ∀ B : Set X, B ⊆ A →
     (∀ x, x ∈ A → (predR ρ x ∩ A ⊆ B → x ∈ B)) → B = A
 
@@ -201,7 +201,7 @@ theorem wf_equiv (ρ : X → X → Prop) :
     · exact not_desc_imp_wf
 
 /-- Notes: ρ is w.f. on A. -/
-@[simp]def WFOn (ρ : X → X → Prop) (A : Set X) : Prop :=
+def WFOn (ρ : X → X → Prop) (A : Set X) : Prop :=
   ∀ B : Set X, B ⊆ A → (∃ x, x ∈ B) → ∃ x, x ∈ B ∧ predR ρ x ∩ B = ∅
 
 theorem predR_eq_empty_of_not_mem_range {ρ : X → X → Prop} {x : X}
