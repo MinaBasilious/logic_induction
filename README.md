@@ -7,6 +7,7 @@ The project has no dependencies, not even Mathlib. It defines its own `Set` and 
 ## Contents
 
 - `LogicInduction/Set.lean`: sets as predicates, membership, subset, intersection, difference, `univ`, `range`, and `predR`, which is the notes' `ρ[x]`.
+<<<<<<< HEAD
 - `LogicInduction/indN.lean`: Section 1. Peano-like structures and the equivalence of the two induction principles.
 - `LogicInduction/Relations.lean`: relative product, transitivity, powers `ρⁿ`, the closures `ρ⁺` and `ρ*`, and their properties.
 - `LogicInduction/WellFounded.lean`: well-founded relations, the principle of ρ,A-induction, and the equivalence theorem.
@@ -15,6 +16,11 @@ The project has no dependencies, not even Mathlib. It defines its own `Set` and 
 - `LogicInduction/NatOrder.lean`: `≤ = S*`, `< = S⁺`, and course of values induction on `ℕ`.
 - `LogicInduction/WellOrder.lean`: well orderings and well-foundedness.
 - `docs/Logic_Induction.pdf`: my written proofs, which the Lean code follows.
+=======
+- `LogicInduction/indN.lean`: Section 1. Peano-like structures and the equivalence of the two induction principles on `N`.
+- `LogicInduction/WellFounded.lean`: Section 2. Well-founded relations, the principle of ρ,A-induction, and the equivalence theorem.
+- `docs/Logic_Induction.pdf`: my written proof of Section 1 & 2, which the Lean code follows.
+>>>>>>> b026bdf3b4d97c75090cd34aeb7f1d28d76eefef
 
 Each theorem carries a comment with its number in the notes where it has one.
 
@@ -54,4 +60,4 @@ The statements follow the notes by Prof. Mohamed Amer, which are not included in
 
 ## License
 
-MIT. See [MIT License](./LICENSE).
+See [MIT License](./LICENSE).
