@@ -87,7 +87,7 @@ theorem ind_imp_no_desc {ρ : X → X → Prop}
     (h : ∀ A : Set X, IndPrinciple ρ A) : ¬ ∃ a, InfDesc ρ a := by
   intro hex
   obtain ⟨a, ha⟩ := hex
-  have hstep : ∀ x, x ∈ range a → predR ρ x ∩ range a ⊆ ∅ → x ∈ ∅ := by
+  have hstep : ∀ x, x ∈ range a → predR ρ x ∩ range a ⊆ ∅ → False := by
     intro x hx hsub
     exfalso
     exact pred_inter_range_ne_empty ha x hx (subset_antisymm hsub empty_subset)
@@ -103,7 +103,7 @@ theorem ind_imp_no_desc' {ρ : X → X → Prop}
   let A := range a
   specialize h A
   simp[InfDesc] at ha
-  have hstep : ∀ x, x ∈ A → (predR ρ x ∩ A ⊆ ∅ → x ∈ ∅) := by
+  have hstep : ∀ x, x ∈ A → (predR ρ x ∩ A ⊆ ∅ → False) := by
     intro x hx hsub
     exfalso
     apply pred_inter_range_ne_empty ha x hx

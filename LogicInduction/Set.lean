@@ -7,10 +7,9 @@ namespace Set
 variable {α : Type}
 
 /-- `mem a s` says `a` belongs to `s`. -/
-def mem (a : α) (s : Set α) : Prop := s a
+def mem (s : Set α) (a : α) : Prop := s a
 
-scoped infix:50 " ∈ " => mem
-
+instance : Membership α (Set α) := ⟨mem⟩
 instance : HasSubset (Set α) := ⟨fun s t => ∀ a, a ∈ s → a ∈ t⟩
 instance : EmptyCollection (Set α) := ⟨fun _ => False⟩
 instance : Inter (Set α) := ⟨fun s t a => a ∈ s ∧ a ∈ t⟩
