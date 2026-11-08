@@ -1,0 +1,2133 @@
+[
+ {
+  "full": "LogicInduction.Set",
+  "name": "Set",
+  "kind": "def",
+  "module": "Set",
+  "sig": "def Set (\u03b1 : Type) : Type",
+  "body": "\u03b1 \u2192 Prop",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 3
+ },
+ {
+  "full": "LogicInduction.Set.mem",
+  "name": "mem",
+  "kind": "def",
+  "module": "Set",
+  "sig": "def mem (s : Set \u03b1) (a : \u03b1) : Prop",
+  "body": "s a",
+  "doc": "`mem a s` says `a` belongs to `s`.",
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 10
+ },
+ {
+  "full": "LogicInduction.Set.range",
+  "name": "range",
+  "kind": "def",
+  "module": "Set",
+  "sig": "def range (f : Nat \u2192 \u03b1) : Set \u03b1",
+  "body": "fun a => \u2203 n, f n = a",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 19
+ },
+ {
+  "full": "LogicInduction.Set.univ",
+  "name": "univ",
+  "kind": "def",
+  "module": "Set",
+  "sig": "def univ : Set \u03b1",
+  "body": "fun _ => True",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 21
+ },
+ {
+  "full": "LogicInduction.Set.mem_univ",
+  "name": "mem_univ",
+  "kind": "theorem",
+  "module": "Set",
+  "sig": "@[simp]theorem mem_univ (a : \u03b1) : a \u2208 (univ : Set \u03b1)",
+  "body": "trivial",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 23
+ },
+ {
+  "full": "LogicInduction.Set.ext",
+  "name": "ext",
+  "kind": "theorem",
+  "module": "Set",
+  "sig": "theorem ext {s t : Set \u03b1} (h : \u2200 a, a \u2208 s \u2194 a \u2208 t) : s = t",
+  "body": "funext fun a => propext (h a)",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 25
+ },
+ {
+  "full": "LogicInduction.Set.mem_inter_iff",
+  "name": "mem_inter_iff",
+  "kind": "theorem",
+  "module": "Set",
+  "sig": "@[simp]theorem mem_inter_iff {s t : Set \u03b1} {a : \u03b1} : a \u2208 s \u2229 t \u2194 a \u2208 s \u2227 a \u2208 t",
+  "body": "Iff.rfl",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 28
+ },
+ {
+  "full": "LogicInduction.Set.predR",
+  "name": "predR",
+  "kind": "def",
+  "module": "Set",
+  "sig": "def predR {X : Type} (R : X \u2192 X \u2192 Prop) (x : X) : Set X",
+  "body": "fun y => R y x",
+  "doc": "`predR R x` is the set of `R`-predecessors of `x`, written `\u03c1[x]` in the sheet.",
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 32
+ },
+ {
+  "full": "LogicInduction.Set.mem_predR",
+  "name": "mem_predR",
+  "kind": "theorem",
+  "module": "Set",
+  "sig": "@[simp]theorem mem_predR {X : Type} {R : X \u2192 X \u2192 Prop} {x y : X} :\n    y \u2208 predR R x \u2194 R y x",
+  "body": "Iff.rfl",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 34
+ },
+ {
+  "full": "LogicInduction.Set.mem_sdiff_iff",
+  "name": "mem_sdiff_iff",
+  "kind": "theorem",
+  "module": "Set",
+  "sig": "@[simp]theorem mem_sdiff_iff {s t : Set \u03b1} {a : \u03b1} : a \u2208 s \\ t \u2194 a \u2208 s \u2227 \u00ac a \u2208 t",
+  "body": "Iff.rfl",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 37
+ },
+ {
+  "full": "LogicInduction.Set.subset_antisymm",
+  "name": "subset_antisymm",
+  "kind": "theorem",
+  "module": "Set",
+  "sig": "theorem subset_antisymm {s t : Set \u03b1} (h1 : s \u2286 t) (h2 : t \u2286 s) : s = t",
+  "body": "ext fun a => \u27e8fun ha => h1 a ha, fun ha => h2 a ha\u27e9",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.ext"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 39
+ },
+ {
+  "full": "LogicInduction.Set.nothing_empty",
+  "name": "nothing_empty",
+  "kind": "theorem",
+  "module": "Set",
+  "sig": "@[simp]theorem nothing_empty {x : \u03b1} : \u00ac x \u2208 (\u2205 : Set \u03b1)",
+  "body": "fun h => h",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 42
+ },
+ {
+  "full": "LogicInduction.Set.empty_subset",
+  "name": "empty_subset",
+  "kind": "theorem",
+  "module": "Set",
+  "sig": "@[simp]theorem empty_subset {s : Set \u03b1} : \u2205 \u2286 s",
+  "body": "fun _ h => h.elim",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 44
+ },
+ {
+  "full": "LogicInduction.Set.empty_inter",
+  "name": "empty_inter",
+  "kind": "theorem",
+  "module": "Set",
+  "sig": "@[simp]theorem empty_inter {s : Set \u03b1} : \u2205 \u2229 s = \u2205",
+  "body": "ext fun _ => \u27e8fun ha => ha.1, fun ha => (nothing_empty ha).elim\u27e9",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.ext",
+   "LogicInduction.Set.nothing_empty"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 46
+ },
+ {
+  "full": "LogicInduction.Set.exists_mem_of_ne_empty",
+  "name": "exists_mem_of_ne_empty",
+  "kind": "theorem",
+  "module": "Set",
+  "sig": "@[simp]theorem exists_mem_of_ne_empty {s : Set \u03b1} : (s \u2260 \u2205) \u2192 \u2203 x, x \u2208 s",
+  "body": "fun h => (Classical.byContradiction (fun nh => h (ext (fun a => \u27e8fun hh => (nh (Exists.intro a hh)).elim, fun hh => (nothing_empty hh).elim\u27e9))))",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.ext",
+   "LogicInduction.Set.nothing_empty"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 48
+ },
+ {
+  "full": "LogicInduction.Set.sdiff_subset",
+  "name": "sdiff_subset",
+  "kind": "theorem",
+  "module": "Set",
+  "sig": "@[simp]theorem sdiff_subset {s r : Set \u03b1} : s \\ r \u2286 s",
+  "body": "fun _ h => h.1",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 50
+ },
+ {
+  "full": "LogicInduction.PeanoLike",
+  "name": "PeanoLike",
+  "kind": "structure",
+  "module": "IndN",
+  "sig": "structure PeanoLike (A : Type) where\n  z  : A\n  S  : A \u2192 A\n  h1 : Function.Injective S\n  h2 : \u2200 x, S x \u2260 z\n  h3 : \u2200 x, x = z \u2228 \u2203 k, S k = x\n\nvariable {N : Type}(M : PeanoLike N)\n\nopen Set PeanoLike",
+  "body": "",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 4
+ },
+ {
+  "full": "LogicInduction.l1",
+  "name": "l1",
+  "kind": "theorem",
+  "module": "IndN",
+  "sig": "theorem l1 {X : Type} {P1 P2 Q : X \u2192 Prop} (h : \u2200 x, P1 x \u2194 P2 x) :\n    (\u2200 x, (P1 x \u2192 Q x)) \u2194 (\u2200 x, (P2 x \u2192 Q x))",
+  "body": "constructor\n    \u00b7 intro h1 x\n      rw[\u2190 h x]\n      exact h1 x\n    \u00b7 intro h1 x\n      rw[h x]\n      exact h1 x",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [
+   "propext"
+  ],
+  "line": 15
+ },
+ {
+  "full": "LogicInduction.Rel",
+  "name": "Rel",
+  "kind": "def",
+  "module": "IndN",
+  "sig": "def Rel : N \u2192 N \u2192 Prop",
+  "body": "fun k n => M.S k = n",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 25
+ },
+ {
+  "full": "LogicInduction.prop11",
+  "name": "prop11",
+  "kind": "def",
+  "module": "IndN",
+  "sig": "def prop11 : Prop",
+  "body": "\u2200 B : Set N, (M.z \u2208 B \u2227 \u2200 n, (n \u2208 B \u2192 M.S n \u2208 B)) \u2192 B = univ",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set",
+   "LogicInduction.Set.univ"
+  ],
+  "axioms": [],
+  "line": 27
+ },
+ {
+  "full": "LogicInduction.prop12",
+  "name": "prop12",
+  "kind": "def",
+  "module": "IndN",
+  "sig": "def prop12 : Prop",
+  "body": "\u2200 B : Set N, (\u2200 n, (predR (Rel M) n \u2286 B \u2192 n \u2208 B)) \u2192 B = univ",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Rel",
+   "LogicInduction.Set",
+   "LogicInduction.Set.predR",
+   "LogicInduction.Set.univ"
+  ],
+  "axioms": [],
+  "line": 30
+ },
+ {
+  "full": "LogicInduction.thm13",
+  "name": "thm13",
+  "kind": "theorem",
+  "module": "IndN",
+  "sig": "theorem thm13 : prop11 M \u2194 prop12 M",
+  "body": "apply l1\n  intro B\n  unfold predR Rel\n  constructor\n  \u00b7 intro h n hh\n    let h3 := M.h3\n    specialize h3 n\n    cases h3 with\n    | inl hhh =>\n      rw[hhh]\n      exact h.1\n    | inr hhh =>\n      obtain \u27e8k, hk\u27e9 := hhh\n      rw[\u2190 hk]\n      apply h.2 k\n      apply hh\n      exact hk\n  \u00b7 intro h\n    constructor\n    \u00b7 apply h\n      intro k hk\n      let h2 := M.h2\n      specialize h2 k\n      contradiction\n    \u00b7 intro n bn\n      apply (h (M.S n))\n      intro k hk\n      let h1 := M.h1\n      have hh : M.S k = M.S n := hk\n      have : k = n := h1 hk\n      rwa[this]",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Rel",
+   "LogicInduction.Set.predR",
+   "LogicInduction.l1"
+  ],
+  "axioms": [
+   "propext"
+  ],
+  "line": 33
+ },
+ {
+  "full": "LogicInduction.recursion_unique",
+  "name": "recursion_unique",
+  "kind": "theorem",
+  "module": "IndN",
+  "sig": "theorem recursion_unique {A : Type} (hind : prop11 M) (a : A) (\u03b2 : N \u00d7 A \u2192 A)\n    (\u03b3 \u03b4 : N \u2192 A)\n    (h\u03b30 : \u03b3 M.z = a) (h\u03b3s : \u2200 n, \u03b3 (M.S n) = \u03b2 (n, \u03b3 n))\n    (h\u03b40 : \u03b4 M.z = a) (h\u03b4s : \u2200 n, \u03b4 (M.S n) = \u03b2 (n, \u03b4 n)) :\n    \u03b3 = \u03b4",
+  "body": "funext n\n  let B : Set N := fun k => \u03b3 k = \u03b4 k\n  have hBu : B = univ := by\n    apply hind B\n    constructor\n    \u00b7 exact h\u03b30.trans h\u03b40.symm\n    \u00b7 intro k (hk : \u03b3 k = \u03b4 k)\n      show \u03b3 (M.S k) = \u03b4 (M.S k)\n      rw [h\u03b3s, h\u03b4s, hk]\n  have hn : n \u2208 B := by\n    rw [hBu]\n    exact mem_univ n\n  exact hn",
+  "doc": "Recursion theorem, uniqueness part.",
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set",
+   "LogicInduction.Set.mem_univ",
+   "LogicInduction.Set.univ"
+  ],
+  "axioms": [
+   "Quot.sound"
+  ],
+  "line": 67
+ },
+ {
+  "full": "LogicInduction.RelSub",
+  "name": "RelSub",
+  "kind": "def",
+  "module": "Relations",
+  "sig": "def RelSub (\u03c3 \u03c1 : X \u2192 X \u2192 Prop) : Prop",
+  "body": "\u2200 x y, \u03c3 x y \u2192 \u03c1 x y",
+  "doc": "Notes: \u03c3 \u2286 \u03c1 for binary relations.",
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 8
+ },
+ {
+  "full": "LogicInduction.relProd",
+  "name": "relProd",
+  "kind": "def",
+  "module": "Relations",
+  "sig": "def relProd (\u03c1 \u03c3 : X \u2192 X \u2192 Prop) : X \u2192 X \u2192 Prop",
+  "body": "fun x z => \u2203 y, \u03c1 x y \u2227 \u03c3 y z",
+  "doc": "Notes: relative product \u03c1|\u03c3.",
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 11
+ },
+ {
+  "full": "LogicInduction.RelRange",
+  "name": "RelRange",
+  "kind": "def",
+  "module": "Relations",
+  "sig": "def RelRange (\u03c1 : X \u2192 X \u2192 Prop) : Set X",
+  "body": "fun y => \u2203 x, \u03c1 x y",
+  "doc": "Notes: R\u03c1, the range of \u03c1.",
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 15
+ },
+ {
+  "full": "LogicInduction.RelDomain",
+  "name": "RelDomain",
+  "kind": "def",
+  "module": "Relations",
+  "sig": "def RelDomain (\u03c1 : X \u2192 X \u2192 Prop) : Set X",
+  "body": "fun x => \u2203 y, \u03c1 x y",
+  "doc": "Notes: D\u03c1, the domain of \u03c1.",
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 18
+ },
+ {
+  "full": "LogicInduction.Field",
+  "name": "Field",
+  "kind": "def",
+  "module": "Relations",
+  "sig": "def Field (\u03c1 : X \u2192 X \u2192 Prop) : Set X",
+  "body": "fun x => x \u2208 RelDomain \u03c1 \u2228 x \u2208 RelRange \u03c1",
+  "doc": "Notes: the field F\u03c1 = D\u03c1 \u222a R\u03c1.",
+  "notes": null,
+  "deps": [
+   "LogicInduction.RelDomain",
+   "LogicInduction.RelRange"
+  ],
+  "axioms": [],
+  "line": 21
+ },
+ {
+  "full": "LogicInduction.IdOn",
+  "name": "IdOn",
+  "kind": "def",
+  "module": "Relations",
+  "sig": "def IdOn (A : Set X) : X \u2192 X \u2192 Prop",
+  "body": "fun x y => (x = y) \u2227 (A x)",
+  "doc": "Notes: I_A.",
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 25
+ },
+ {
+  "full": "LogicInduction.relPow",
+  "name": "relPow",
+  "kind": "def",
+  "module": "Relations",
+  "sig": "def relPow (\u03c1 : X \u2192 X \u2192 Prop) : Nat \u2192 X \u2192 X \u2192 Prop\n  | 0 => IdOn (Field \u03c1)\n  | n+1 => relProd (relPow \u03c1 n) \u03c1",
+  "body": "",
+  "doc": "Notes: \u03c1^n, with \u03c1^0 = I_{F\u03c1} and \u03c1^(n+1) = \u03c1^n | \u03c1.",
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 28
+ },
+ {
+  "full": "LogicInduction.relStar",
+  "name": "relStar",
+  "kind": "def",
+  "module": "Relations",
+  "sig": "def relStar (\u03c1 : X \u2192 X \u2192 Prop) : X \u2192 X \u2192 Prop",
+  "body": "fun x y => \u2203 n, relPow \u03c1 n x y",
+  "doc": "Notes: \u03c1* = \u22c3 \u03c1^n over n \u2265 0.",
+  "notes": null,
+  "deps": [
+   "LogicInduction.relPow"
+  ],
+  "axioms": [],
+  "line": 33
+ },
+ {
+  "full": "LogicInduction.relPlus",
+  "name": "relPlus",
+  "kind": "def",
+  "module": "Relations",
+  "sig": "def relPlus (\u03c1 : X \u2192 X \u2192 Prop) : X \u2192 X \u2192 Prop",
+  "body": "fun x y => \u2203 n, relPow \u03c1 (n+1) x y",
+  "doc": "Notes: \u03c1\u207a = \u22c3 \u03c1^n over n \u2265 1.",
+  "notes": null,
+  "deps": [
+   "LogicInduction.relPow"
+  ],
+  "axioms": [],
+  "line": 37
+ },
+ {
+  "full": "LogicInduction.TransRel",
+  "name": "TransRel",
+  "kind": "def",
+  "module": "Relations",
+  "sig": "def TransRel (\u03c1 : X \u2192 X \u2192 Prop) : Prop",
+  "body": "\u2200 x y z, \u03c1 x y \u2192 \u03c1 y z \u2192 \u03c1 x z",
+  "doc": "Notes: \u03c1 is transitive.",
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 41
+ },
+ {
+  "full": "LogicInduction.IsFun",
+  "name": "IsFun",
+  "kind": "def",
+  "module": "Relations",
+  "sig": "def IsFun (\u03c1 : X \u2192 X \u2192 Prop) : Prop",
+  "body": "\u2200 x y z, \u03c1 x y \u2192 \u03c1 x z \u2192 y = z",
+  "doc": "Notes: \u03c1 is a function (a single-valued relation).",
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 44
+ },
+ {
+  "full": "LogicInduction.trans_iff_relProd_sub",
+  "name": "trans_iff_relProd_sub",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem trans_iff_relProd_sub (\u03c1 : X \u2192 X \u2192 Prop) :\n    TransRel \u03c1 \u2194 RelSub (relProd \u03c1 \u03c1) \u03c1",
+  "body": "constructor\n  \u00b7 intro h x z hxz\n    obtain \u27e8y, hx, hz\u27e9 := hxz\n    exact h x y z hx hz\n  \u00b7 intro h x y z hxy hyz\n    apply h\n    exists y",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 46
+ },
+ {
+  "full": "LogicInduction.isFun_relProd",
+  "name": "isFun_relProd",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem isFun_relProd {\u03c1 \u03c3 : X \u2192 X \u2192 Prop}\n    (h\u03c1 : IsFun \u03c1) (h\u03c3 : IsFun \u03c3) : IsFun (relProd \u03c1 \u03c3)",
+  "body": "intro x y z hxy hxz\n  obtain \u27e8k,hx1, hy\u27e9 := hxy\n  obtain \u27e8l, hx2, hz\u27e9 := hxz\n  have h : k = l := h\u03c1 x k l hx1 hx2\n  apply h\u03c3 k y z\n  \u00b7 assumption\n  \u00b7 rw[h]; assumption",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 57
+ },
+ {
+  "full": "LogicInduction.sigma_fun_on_range",
+  "name": "sigma_fun_on_range",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem sigma_fun_on_range {\u03c1 \u03c3 : X \u2192 X \u2192 Prop}\n    (h : IsFun (relProd \u03c1 \u03c3)) :\n    \u2200 y, (\u2203 x, \u03c1 x y) \u2192 \u2200 z w, \u03c3 y z \u2192 \u03c3 y w \u2192 z = w",
+  "body": "intro y hxy z w hyz hyw\n  obtain \u27e8x, hxy\u27e9 := hxy\n  apply h x z w\n  \u00b7 exists y\n  \u00b7 exists y",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 67
+ },
+ {
+  "full": "LogicInduction.relProd_assoc_iff",
+  "name": "relProd_assoc_iff",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relProd_assoc_iff (\u03c1 \u03c3 \u03c4 : X \u2192 X \u2192 Prop) (x w : X) :\n    relProd (relProd \u03c1 \u03c3) \u03c4 x w \u2194 relProd \u03c1 (relProd \u03c3 \u03c4) x w",
+  "body": "unfold relProd\n  constructor\n  \u00b7 intro \u27e8y, hy1, hy2\u27e9\n    obtain \u27e8z, hz1, hz2\u27e9 := hy1\n    exists z\n    constructor\n    \u00b7 assumption\n    \u00b7 exists y\n  \u00b7 intro \u27e8y, hy1, hy2\u27e9\n    obtain \u27e8z, hz1, hz2\u27e9 := hy2\n    exists z\n    constructor\n    \u00b7 exists y\n    \u00b7 assumption",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.relProd"
+  ],
+  "axioms": [],
+  "line": 76
+ },
+ {
+  "full": "LogicInduction.relProd_assoc",
+  "name": "relProd_assoc",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relProd_assoc (\u03c1 \u03c3 \u03c4 : X \u2192 X \u2192 Prop) :\n    relProd (relProd \u03c1 \u03c3) \u03c4 = relProd \u03c1 (relProd \u03c3 \u03c4)",
+  "body": "ext x w\n  exact relProd_assoc_iff \u03c1 \u03c3 \u03c4 x w",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.ext",
+   "LogicInduction.relProd_assoc_iff"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 93
+ },
+ {
+  "full": "LogicInduction.relProd_not_comm",
+  "name": "relProd_not_comm",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relProd_not_comm :\n    \u00ac \u2200 \u03c1 \u03c3 : Nat \u2192 Nat \u2192 Prop, relProd \u03c1 \u03c3 = relProd \u03c3 \u03c1",
+  "body": "simp\n  let \u03c1 : Nat \u2192 Nat \u2192 Prop := fun n m \u21a6 n = 0 \u2227 m = 1\n  let \u03c3 : Nat \u2192 Nat \u2192 Prop := fun n m \u21a6 n = 1 \u2227 m = 2\n  have h1 : relProd \u03c1 \u03c3 0 2 := \u27e81, \u27e8rfl, rfl\u27e9, \u27e8rfl, rfl\u27e9\u27e9\n  have h2 : \u00ac relProd \u03c3 \u03c1 0 2 := by intro h; obtain \u27e8k, hk1, hk2\u27e9 := h; have := (hk1.1); contradiction\n  exists \u03c1, \u03c3\n  intro h\n  apply h2\n  rwa[\u2190 h]",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.relProd"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 98
+ },
+ {
+  "full": "LogicInduction.relProd_idOn_field",
+  "name": "relProd_idOn_field",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relProd_idOn_field {\u03c1 : X \u2192 X \u2192 Prop} (m : Nat) :\n    relProd (relPow \u03c1 m) (IdOn (Field \u03c1)) = relPow \u03c1 m",
+  "body": "ext x y\n  constructor\n  \u00b7 intro \u27e8z, hz1, hz2\u27e9\n    obtain \u27e8hy1, hy2\u27e9 := hz2\n    rwa[\u2190 hy1]\n  \u00b7 intro h\n    exists y\n    constructor\n    \u00b7 assumption\n    \u00b7 constructor\n      \u00b7 rfl\n      \u00b7 cases m\n        \u00b7 obtain \u27e8h1, h2\u27e9 := h\n          rwa[\u2190 h1]\n        \u00b7 rename_i n\n          obtain \u27e8k, h1, h2\u27e9 := h\n          right\n          exists k",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.ext"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 110
+ },
+ {
+  "full": "LogicInduction.relPow_add",
+  "name": "relPow_add",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relPow_add (\u03c1 : X \u2192 X \u2192 Prop) (m n : Nat) :\n    relPow \u03c1 (m + n) = relProd (relPow \u03c1 m) (relPow \u03c1 n)",
+  "body": "induction n with\n  | zero => exact (relProd_idOn_field m).symm\n  | succ n hn =>\n    ext x y\n    constructor\n    \u00b7 intro \u27e8z, hz1, hz2\u27e9\n      have : m.add n = m + n := rfl\n      rw[this, hn] at hz1\n      obtain \u27e8w, hw1, hw2\u27e9 := hz1\n      exists w\n      constructor\n      \u00b7 assumption\n      \u00b7 exists z\n    \u00b7 intro \u27e8z, hz1, hz2\u27e9\n      obtain \u27e8w, hw1, hw2\u27e9 := hz2\n      exists w\n      constructor\n      \u00b7 have : m.add n = m + n := rfl\n        rw[this, hn]\n        exists z\n      \u00b7 assumption",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.ext",
+   "LogicInduction.relProd_idOn_field"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 133
+ },
+ {
+  "full": "LogicInduction.relSub_relPlus",
+  "name": "relSub_relPlus",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relSub_relPlus (\u03c1 : X \u2192 X \u2192 Prop) : RelSub \u03c1 (relPlus \u03c1)",
+  "body": "intro x y hxy\n  exists 0, x\n  exact \u27e8\u27e8rfl,Or.inl \u27e8y, hxy\u27e9\u27e9, hxy\u27e9",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 157
+ },
+ {
+  "full": "LogicInduction.relPlus_trans",
+  "name": "relPlus_trans",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relPlus_trans (\u03c1 : X \u2192 X \u2192 Prop) : TransRel (relPlus \u03c1)",
+  "body": "intro x y z \u27e8n, hxy\u27e9 \u27e8m, hyz\u27e9\n  exists (n + m + 1)\n  have : n + m + 1 + 1 = (n + 1) + (m + 1):= by omega\n  rw[this]\n  rw[relPow_add \u03c1 (n + 1) (m + 1)]\n  exists y",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.relPow_add"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 162
+ },
+ {
+  "full": "LogicInduction.relSub_relPow_succ",
+  "name": "relSub_relPow_succ",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relSub_relPow_succ {\u03c1 \u03c3 : X \u2192 X \u2192 Prop}\n    (h\u03c1\u03c3 : RelSub \u03c1 \u03c3) (h\u03c3 : TransRel \u03c3) (n : Nat) :\n    RelSub (relPow \u03c1 (n+1)) \u03c3",
+  "body": "induction n with\n  | zero =>\n    intro x y \u27e8z, \u27e8h, hx1\u27e9, hz2\u27e9\n    rw[\u2190 h] at hz2\n    exact h\u03c1\u03c3 x y hz2\n  | succ n hn =>\n    intro x y \u27e8z, hx1, hz2\u27e9\n    have hxz := hn x z hx1\n    have hzy := h\u03c1\u03c3 z y hz2\n    exact h\u03c3 x z y hxz hzy",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 170
+ },
+ {
+  "full": "LogicInduction.relPlus_least",
+  "name": "relPlus_least",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relPlus_least {\u03c1 \u03c3 : X \u2192 X \u2192 Prop}\n    (h\u03c1\u03c3 : RelSub \u03c1 \u03c3) (h\u03c3 : TransRel \u03c3) : RelSub (relPlus \u03c1) \u03c3",
+  "body": "intro x y \u27e8n, hxy\u27e9\n  exact relSub_relPow_succ h\u03c1\u03c3 h\u03c3 n x y hxy",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.relSub_relPow_succ"
+  ],
+  "axioms": [],
+  "line": 184
+ },
+ {
+  "full": "LogicInduction.ReflOn",
+  "name": "ReflOn",
+  "kind": "def",
+  "module": "Relations",
+  "sig": "def ReflOn (A : Set X) (\u03c3 : X \u2192 X \u2192 Prop) : Prop",
+  "body": "\u2200 x, (x \u2208 A) \u2192 \u03c3 x x",
+  "doc": "Notes: \u03c3 is reflexive on A.",
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 190
+ },
+ {
+  "full": "LogicInduction.reflOn_relStar",
+  "name": "reflOn_relStar",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem reflOn_relStar (\u03c1 : X \u2192 X \u2192 Prop) : ReflOn (Field \u03c1) (relStar \u03c1)",
+  "body": "intro _ _\n  exists 0",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 192
+ },
+ {
+  "full": "LogicInduction.relSub_relStar",
+  "name": "relSub_relStar",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relSub_relStar (\u03c1 : X \u2192 X \u2192 Prop) : RelSub \u03c1 (relStar \u03c1)",
+  "body": "intro x y hxy\n  exists 1, x\n  constructor\n  \u00b7 constructor\n    \u00b7 rfl\n    \u00b7 left\n      exists y\n  \u00b7 assumption",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 196
+ },
+ {
+  "full": "LogicInduction.relStar_trans",
+  "name": "relStar_trans",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relStar_trans (\u03c1 : X \u2192 X \u2192 Prop) : TransRel (relStar \u03c1)",
+  "body": "intro x y z \u27e8n, hxy\u27e9 \u27e8m, hyz\u27e9\n  exists (n + m)\n  rw[relPow_add \u03c1 n m]\n  exists y",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.relPow_add"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 206
+ },
+ {
+  "full": "LogicInduction.relStar_least",
+  "name": "relStar_least",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relStar_least {\u03c1 \u03c3 : X \u2192 X \u2192 Prop}\n    (h\u03c1\u03c3 : RelSub \u03c1 \u03c3) (h\u03c3 : TransRel \u03c3) (hrefl : ReflOn (Field \u03c1) \u03c3) :\n    RelSub (relStar \u03c1) \u03c3",
+  "body": "intro x y \u27e8n, hxy\u27e9\n  cases n with\n  | zero =>\n    obtain \u27e8h, hx\u27e9 := hxy\n    rw[h]\n    apply hrefl\n    rwa[\u2190 h]\n  | succ k =>\n    have := relSub_relPow_succ h\u03c1\u03c3 h\u03c3 k x y hxy\n    assumption",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.relSub_relPow_succ"
+  ],
+  "axioms": [],
+  "line": 212
+ },
+ {
+  "full": "LogicInduction.relPlus_decomp",
+  "name": "relPlus_decomp",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relPlus_decomp {\u03c1 : X \u2192 X \u2192 Prop} {x y : X} (h : relPlus \u03c1 x y) :\n    \u2203 u, relStar \u03c1 x u \u2227 \u03c1 u y",
+  "body": "obtain \u27e8n, w, hn\u27e9 := h\n  exists w\n  constructor\n  \u00b7 exists n; exact hn.1\n  \u00b7 exact hn.2",
+  "doc": "Notes, Remark 3: x \u03c1\u207a y gives u with x \u03c1* u and u \u03c1 y.",
+  "notes": "Remark 3",
+  "deps": [],
+  "axioms": [],
+  "line": 228
+ },
+ {
+  "full": "LogicInduction.relPlus_of_relPlus_relStar",
+  "name": "relPlus_of_relPlus_relStar",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relPlus_of_relPlus_relStar {\u03c1 : X \u2192 X \u2192 Prop} {x y z : X}\n    (h1 : relPlus \u03c1 x y) (h2 : relStar \u03c1 y z) : relPlus \u03c1 x z",
+  "body": "obtain \u27e8n, hn\u27e9 := h1\n  obtain \u27e8m, hm\u27e9 := h2\n  have h := relPow_add \u03c1 (n + 1) m\n  exists (n + m)\n  have : n + m + 1 = n + 1 + m := by omega\n  rw[this, h]\n  exists y",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.relPow_add"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 236
+ },
+ {
+  "full": "LogicInduction.relStar_relProd",
+  "name": "relStar_relProd",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relStar_relProd (\u03c1 : X \u2192 X \u2192 Prop) :\n    relProd (relStar \u03c1) \u03c1 = relPlus \u03c1",
+  "body": "ext x y\n  constructor\n  \u00b7 intro \u27e8z, \u27e8k, _\u27e9, _\u27e9\n    exists k, z\n  \u00b7 intro \u27e8k, \u27e8z, _, _\u27e9\u27e9\n    exists z\n    constructor\n    \u00b7 exists k\n    \u00b7 assumption",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.ext"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 246
+ },
+ {
+  "full": "LogicInduction.relPow_one",
+  "name": "relPow_one",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relPow_one (\u03c1 : X \u2192 X \u2192 Prop) : relPow \u03c1 1 = \u03c1",
+  "body": "ext x y\n  constructor\n  \u00b7 intro \u27e8z, \u27e8h, _\u27e9, _\u27e9\n    rwa[h]\n  \u00b7 intro h\n    exists x\n    constructor\n    \u00b7 constructor\n      \u00b7 rfl\n      \u00b7 left; exists y\n    \u00b7 assumption",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.ext"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 259
+ },
+ {
+  "full": "LogicInduction.relProd_relStar",
+  "name": "relProd_relStar",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relProd_relStar (\u03c1 : X \u2192 X \u2192 Prop) :\n    relProd \u03c1 (relStar \u03c1) = relPlus \u03c1",
+  "body": "ext x y\n  constructor\n  \u00b7 intro \u27e8z, hz1, k, hk\u27e9\n    have : relPow \u03c1 (k + 1) x y := by\n      rw[Nat.add_comm, relPow_add \u03c1 1 k]\n      exists z\n      constructor\n      \u00b7 rwa[relPow_one \u03c1]\n      \u00b7 assumption\n    exists k\n  \u00b7 intro \u27e8k, z, hkxz, hzy\u27e9\n    have : relPow \u03c1 (k + 1) x y := by\n      exists z\n    rw[Nat.add_comm, relPow_add \u03c1 1 k] at this\n    obtain \u27e8w, \u27e8v, \u27e8h, hv\u27e9, hv2\u27e9, hkwy\u27e9 := this\n    exists w\n    constructor\n    \u00b7 rwa[h]\n    \u00b7 exists k",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.ext",
+   "LogicInduction.relPow",
+   "LogicInduction.relPow_add",
+   "LogicInduction.relPow_one"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 272
+ },
+ {
+  "full": "LogicInduction.relStar_relProd_eq_relProd_relStar",
+  "name": "relStar_relProd_eq_relProd_relStar",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relStar_relProd_eq_relProd_relStar (\u03c1 : X \u2192 X \u2192 Prop) :\n    relProd (relStar \u03c1) \u03c1 = relProd \u03c1 (relStar \u03c1)",
+  "body": "rw [relStar_relProd, relProd_relStar]",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.relProd_relStar",
+   "LogicInduction.relStar_relProd"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 294
+ },
+ {
+  "full": "LogicInduction.relPlus_remark3",
+  "name": "relPlus_remark3",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relPlus_remark3 {\u03c1 : X \u2192 X \u2192 Prop} {x y : X} (h : relPlus \u03c1 x y) :\n    (\u2203 u, relStar \u03c1 x u \u2227 \u03c1 u y) \u2227 (\u2203 v, \u03c1 x v \u2227 relStar \u03c1 v y)",
+  "body": "constructor\n  \u00b7 rw[\u2190 relStar_relProd \u03c1] at h\n    obtain \u27e8u, hu\u27e9 := h\n    exists u\n  \u00b7 rw[\u2190 relProd_relStar \u03c1] at h\n    obtain \u27e8v, hv\u27e9 := h\n    exists v",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.relProd_relStar",
+   "LogicInduction.relStar_relProd"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 299
+ },
+ {
+  "full": "LogicInduction.relPlus_remark3'",
+  "name": "relPlus_remark3'",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relPlus_remark3' {\u03c1 : X \u2192 X \u2192 Prop} {x y : X} (h : relPlus \u03c1 x y) :\n    (\u2203 u, u \u2208 RelDomain \u03c1 \u2227 relStar \u03c1 x u \u2227 \u03c1 u y) \u2227\n    (\u2203 v, v \u2208 RelRange \u03c1 \u2227 \u03c1 x v \u2227 relStar \u03c1 v y)",
+  "body": "constructor\n  \u00b7 rw[\u2190 relStar_relProd \u03c1] at h\n    obtain \u27e8u, hu\u27e9 := h\n    exists u\n    constructor\n    \u00b7 exists y; exact hu.2\n    \u00b7 assumption\n  \u00b7 rw[\u2190 relProd_relStar \u03c1] at h\n    obtain \u27e8v, hv\u27e9 := h\n    exists v\n    constructor\n    \u00b7 exists x; exact hv.1\n    \u00b7 assumption",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.relProd_relStar",
+   "LogicInduction.relStar_relProd"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 309
+ },
+ {
+  "full": "LogicInduction.Exp",
+  "name": "Exp",
+  "kind": "inductive",
+  "module": "Relations",
+  "sig": "inductive Exp where\n  | nat (n : Nat)\n  | plus\n  | star",
+  "body": "",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 326
+ },
+ {
+  "full": "LogicInduction.relExp",
+  "name": "relExp",
+  "kind": "def",
+  "module": "Relations",
+  "sig": "def relExp (\u03c1 : X \u2192 X \u2192 Prop) : Exp \u2192 X \u2192 X \u2192 Prop\n  | .nat n => relPow \u03c1 n\n  | .plus => relPlus \u03c1\n  | .star => relStar \u03c1",
+  "body": "",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 331
+ },
+ {
+  "full": "LogicInduction.relPlus_imp_relStar",
+  "name": "relPlus_imp_relStar",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relPlus_imp_relStar {\u03c1 : X \u2192 X \u2192 Prop} {x y : X}\n    (h : relPlus \u03c1 x y) : relStar \u03c1 x y",
+  "body": "obtain \u27e8k, hk\u27e9 := h\n  exists (k + 1)",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 336
+ },
+ {
+  "full": "LogicInduction.remark2_i",
+  "name": "remark2_i",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem remark2_i (\u03c1 : X \u2192 X \u2192 Prop) (\u03b1 : Exp) (x y : X) :\n    relExp \u03c1 \u03b1 x y \u2192 relStar \u03c1 x y",
+  "body": "cases \u03b1 with\n  | nat n =>\n    intro _\n    exists n\n  | plus =>\n    intro h\n    exact relPlus_imp_relStar h\n  | star => intro _; assumption",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.relPlus_imp_relStar"
+  ],
+  "axioms": [],
+  "line": 341
+ },
+ {
+  "full": "LogicInduction.remark2_ii",
+  "name": "remark2_ii",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem remark2_ii (\u03c1 : X \u2192 X \u2192 Prop) (\u03b1 \u03b2 : Exp) (x y z : X) :\n    relExp \u03c1 \u03b1 x y \u2192 relExp \u03c1 \u03b2 y z \u2192 relStar \u03c1 x z",
+  "body": "intro h\u03b1 h\u03b2\n  have h\u03b1 := remark2_i \u03c1 \u03b1 x y h\u03b1\n  have h\u03b2  := remark2_i \u03c1 \u03b2 y z h\u03b2\n  exact relStar_trans \u03c1 x y z h\u03b1 h\u03b2",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.relStar_trans",
+   "LogicInduction.remark2_i"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 352
+ },
+ {
+  "full": "LogicInduction.Exp.IsPos",
+  "name": "IsPos",
+  "kind": "def",
+  "module": "Relations",
+  "sig": "def Exp.IsPos : Exp \u2192 Prop\n  | .nat n => 0 < n\n  | .plus => True\n  | .star => False",
+  "body": "",
+  "doc": "\u03b1 is in \u2115\u207a \u222a {+}.",
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 360
+ },
+ {
+  "full": "LogicInduction.relExp_pos",
+  "name": "relExp_pos",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relExp_pos {\u03c1 : X \u2192 X \u2192 Prop} {\u03b1 : Exp} (h\u03b1 : \u03b1.IsPos) {x y : X}\n    (h : relExp \u03c1 \u03b1 x y) : \u2203 m, relPow \u03c1 (m + 1) x y",
+  "body": "cases \u03b1 with\n  | nat n =>\n    cases n with\n    | zero => contradiction\n    | succ k =>\n      exists k\n  | plus =>\n    obtain \u27e8k, hk\u27e9 := h\n    exists k\n  | star => contradiction",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 365
+ },
+ {
+  "full": "LogicInduction.remark2_iii",
+  "name": "remark2_iii",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem remark2_iii (\u03c1 : X \u2192 X \u2192 Prop) (\u03b1 \u03b2 : Exp)\n    (hab : \u03b1.IsPos \u2228 \u03b2.IsPos) (x y z : X) :\n    relExp \u03c1 \u03b1 x y \u2192 relExp \u03c1 \u03b2 y z \u2192 relPlus \u03c1 x z",
+  "body": "intro h\u03b1 h\u03b2\n  rcases hab with hp\u03b1 | hp\u03b2\n  \u00b7 have \u27e8m, hm\u27e9:= relExp_pos hp\u03b1 h\u03b1\n    have \u27e8k, hk\u27e9:= remark2_i \u03c1 \u03b2 y z h\u03b2\n    exists (m + k)\n    have hidx : m + k + 1 = (m + 1) + k := by omega\n    rw [hidx, relPow_add]\n    exists y\n  \u00b7 have \u27e8m, hm\u27e9:= relExp_pos hp\u03b2 h\u03b2\n    have \u27e8k, hk\u27e9:= remark2_i \u03c1 \u03b1 x y h\u03b1\n    exists (k + m)\n    rw[Nat.add_assoc, relPow_add]\n    exists y",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.relExp_pos",
+   "LogicInduction.relPow_add",
+   "LogicInduction.remark2_i"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 378
+ },
+ {
+  "full": "LogicInduction.relPow_mem_field",
+  "name": "relPow_mem_field",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relPow_mem_field {\u03c1 : X \u2192 X \u2192 Prop} {n : Nat} {x y : X}\n    (h : relPow \u03c1 n x y) : x \u2208 Field \u03c1 \u2227 y \u2208 Field \u03c1",
+  "body": "revert x y\n  induction n with\n  | zero =>\n    intro x y h\n    obtain \u27e8h, hh\u27e9 := h\n    constructor\n    \u00b7 assumption\n    \u00b7 rw[\u2190 h]\n      assumption\n  | succ k hk =>\n    intro x y \u27e8z, hkxz, _\u27e9\n    constructor\n    \u00b7 have \u27e8_, _\u27e9:= hk hkxz\n      assumption\n    \u00b7 right; exists z",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 395
+ },
+ {
+  "full": "LogicInduction.relPow_succ_mem",
+  "name": "relPow_succ_mem",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem relPow_succ_mem {\u03c1 : X \u2192 X \u2192 Prop} {n : Nat} {x y : X}\n    (h : relPow \u03c1 (n + 1) x y) : x \u2208 RelDomain \u03c1 \u2227 y \u2208 RelRange \u03c1",
+  "body": "constructor\n  \u00b7 rw[Nat.add_comm, relPow_add] at h\n    obtain \u27e8z, hxz, _\u27e9 := h\n    rw[relPow_one] at hxz\n    exists z\n  \u00b7 obtain \u27e8z, _, _\u27e9 := h\n    exists z",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.relPow_add",
+   "LogicInduction.relPow_one"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 413
+ },
+ {
+  "full": "LogicInduction.domain_relPlus",
+  "name": "domain_relPlus",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem domain_relPlus (\u03c1 : X \u2192 X \u2192 Prop) : RelDomain (relPlus \u03c1) = RelDomain \u03c1",
+  "body": "apply ext\n  intro x\n  constructor\n  \u00b7 intro \u27e8y, k, hk\u27e9\n    exact (relPow_succ_mem hk).1\n  \u00b7 intro \u27e8y, hxy\u27e9\n    exists y, 0\n    rwa[relPow_one]",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.ext",
+   "LogicInduction.relPow_one",
+   "LogicInduction.relPow_succ_mem"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 423
+ },
+ {
+  "full": "LogicInduction.range_relPlus",
+  "name": "range_relPlus",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem range_relPlus (\u03c1 : X \u2192 X \u2192 Prop) : RelRange (relPlus \u03c1) = RelRange \u03c1",
+  "body": "apply ext\n  intro y\n  constructor\n  \u00b7 intro \u27e8x, k, hk\u27e9\n    exact (relPow_succ_mem hk).2\n  \u00b7 intro \u27e8x, hxy\u27e9\n    exists x, 0\n    rwa[relPow_one]",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.ext",
+   "LogicInduction.relPow_one",
+   "LogicInduction.relPow_succ_mem"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 433
+ },
+ {
+  "full": "LogicInduction.domain_relStar",
+  "name": "domain_relStar",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem domain_relStar (\u03c1 : X \u2192 X \u2192 Prop) : RelDomain (relStar \u03c1) = Field \u03c1",
+  "body": "apply ext\n  intro x\n  constructor\n  \u00b7 intro \u27e8y, k, hk\u27e9\n    exact (relPow_mem_field hk).1\n  \u00b7 intro h\n    exists x, 0",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.ext",
+   "LogicInduction.relPow_mem_field"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 443
+ },
+ {
+  "full": "LogicInduction.range_relStar",
+  "name": "range_relStar",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem range_relStar (\u03c1 : X \u2192 X \u2192 Prop) : RelRange (relStar \u03c1) = Field \u03c1",
+  "body": "apply ext\n  intro y\n  constructor\n  \u00b7 intro \u27e8x, k, hk\u27e9\n    exact (relPow_mem_field hk).2\n  \u00b7 intro h\n    exists y, 0",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.ext",
+   "LogicInduction.relPow_mem_field"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 452
+ },
+ {
+  "full": "LogicInduction.mem_field_iff",
+  "name": "mem_field_iff",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem mem_field_iff (\u03c1 : X \u2192 X \u2192 Prop) (x : X) :\n    x \u2208 Field \u03c1 \u2194 x \u2208 RelDomain \u03c1 \u2228 x \u2208 RelRange \u03c1",
+  "body": "Iff.rfl",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 461
+ },
+ {
+  "full": "LogicInduction.field_relPlus",
+  "name": "field_relPlus",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem field_relPlus (\u03c1 : X \u2192 X \u2192 Prop) : Field (relPlus \u03c1) = Field \u03c1",
+  "body": "apply ext\n  intro x\n  rw[mem_field_iff (relPlus \u03c1), mem_field_iff \u03c1, domain_relPlus, range_relPlus]",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.ext",
+   "LogicInduction.domain_relPlus",
+   "LogicInduction.mem_field_iff",
+   "LogicInduction.range_relPlus",
+   "LogicInduction.relPlus"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 464
+ },
+ {
+  "full": "LogicInduction.field_relStar",
+  "name": "field_relStar",
+  "kind": "theorem",
+  "module": "Relations",
+  "sig": "theorem field_relStar (\u03c1 : X \u2192 X \u2192 Prop) : Field (relStar \u03c1) = Field \u03c1",
+  "body": "apply ext\n  intro x\n  rw[mem_field_iff (relStar \u03c1), domain_relStar, range_relStar, or_self]",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.ext",
+   "LogicInduction.domain_relStar",
+   "LogicInduction.mem_field_iff",
+   "LogicInduction.range_relStar",
+   "LogicInduction.relStar"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 469
+ },
+ {
+  "full": "LogicInduction.InfDesc",
+  "name": "InfDesc",
+  "kind": "def",
+  "module": "WellFounded",
+  "sig": "def InfDesc (\u03c1 : X \u2192 X \u2192 Prop) (a : Nat \u2192 X) : Prop",
+  "body": "\u2200 n, \u03c1 (a (n+1)) (a n)",
+  "doc": "Notes: `a` is an infinite descending \u03c1-sequence.",
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 10
+ },
+ {
+  "full": "LogicInduction.WF",
+  "name": "WF",
+  "kind": "def",
+  "module": "WellFounded",
+  "sig": "def WF (\u03c1 : X \u2192 X \u2192 Prop) : Prop",
+  "body": "\u2200 B : Set X, (\u2203 x, x \u2208 B) \u2192 \u2203 x, x \u2208 B \u2227 predR \u03c1 x \u2229 B = \u2205",
+  "doc": "Notes: \u03c1 is well founded.",
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set",
+   "LogicInduction.Set.predR"
+  ],
+  "axioms": [],
+  "line": 14
+ },
+ {
+  "full": "LogicInduction.IndPrinciple",
+  "name": "IndPrinciple",
+  "kind": "def",
+  "module": "WellFounded",
+  "sig": "def IndPrinciple (\u03c1 : X \u2192 X \u2192 Prop) (A : Set X) : Prop",
+  "body": "\u2200 B : Set X, B \u2286 A \u2192\n    (\u2200 x, x \u2208 A \u2192 (predR \u03c1 x \u2229 A \u2286 B \u2192 x \u2208 B)) \u2192 B = A",
+  "doc": "Notes: the principle of \u03c1,A-induction.",
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set",
+   "LogicInduction.Set.predR"
+  ],
+  "axioms": [],
+  "line": 18
+ },
+ {
+  "full": "LogicInduction.exists_mem_sdiff",
+  "name": "exists_mem_sdiff",
+  "kind": "theorem",
+  "module": "WellFounded",
+  "sig": "theorem exists_mem_sdiff {A B : Set X} (hsub : B \u2286 A) (hne : B \u2260 A) :\n    \u2203 x, x \u2208 A \\ B",
+  "body": "by_cases hex : \u2203 x, x \u2208 A \\ B\n  \u00b7 exact hex\n  \u00b7 exfalso\n    apply hne\n    apply subset_antisymm\n    \u00b7 intro x\n      exact hsub x\n    \u00b7 intro x\n      intro hx\n      by_cases h' : x \u2208 B\n      \u00b7 exact h'\n      \u00b7 have : \u2203 x, x \u2208 A \\ B := \u27e8x, \u27e8hx, h'\u27e9\u27e9\n        contradiction",
+  "doc": "Step 1 toward (i) \u2192 (ii).",
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.subset_antisymm"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 23
+ },
+ {
+  "full": "LogicInduction.inter_subset_of_disjoint_sdiff",
+  "name": "inter_subset_of_disjoint_sdiff",
+  "kind": "theorem",
+  "module": "WellFounded",
+  "sig": "theorem inter_subset_of_disjoint_sdiff {A B C : Set X} (h : C \u2229 (A \\ B) = \u2205) : (C \u2229 A) \u2286 B",
+  "body": "intro x hx\n  obtain \u27e8hx1, hx2\u27e9 := hx\n  by_cases h' : x \u2208 B\n  \u00b7 exact h'\n  \u00b7 have h'' : x \u2208 A \\ B := \u27e8hx2, h'\u27e9\n    have h''' : x \u2208 C \u2229 (A \\ B) := \u27e8hx1, h''\u27e9\n    rw[h] at h'''\n    contradiction",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 39
+ },
+ {
+  "full": "LogicInduction.wf_imp_ind",
+  "name": "wf_imp_ind",
+  "kind": "theorem",
+  "module": "WellFounded",
+  "sig": "theorem wf_imp_ind {\u03c1 : X \u2192 X \u2192 Prop} (hwf : WF \u03c1) (A : Set X) :\n    IndPrinciple \u03c1 A",
+  "body": "intro B hsub hpred\n  apply Classical.byContradiction\n  intro hBnA\n  have hext : \u2203 x, x \u2208 (A \\ B) := exists_mem_sdiff hsub hBnA\n  have h := hwf (A \\ B) hext\n  obtain \u27e8x, hx, h\u27e9 := h\n  have hsub : predR \u03c1 x \u2229 A \u2286 B := by\n    apply inter_subset_of_disjoint_sdiff\n    assumption\n  obtain \u27e8hx1, hx2\u27e9 := hx\n  specialize hpred x hx1 hsub\n  contradiction",
+  "doc": "(i) \u2192 (ii)",
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.predR",
+   "LogicInduction.exists_mem_sdiff",
+   "LogicInduction.inter_subset_of_disjoint_sdiff"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 50
+ },
+ {
+  "full": "LogicInduction.range_nonempty",
+  "name": "range_nonempty",
+  "kind": "theorem",
+  "module": "WellFounded",
+  "sig": "theorem range_nonempty (a : Nat \u2192 X) : \u2203 x, x \u2208 range a",
+  "body": "exact \u27e8a 0, 0, rfl\u27e9",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 65
+ },
+ {
+  "full": "LogicInduction.pred_inter_range_nonempty",
+  "name": "pred_inter_range_nonempty",
+  "kind": "theorem",
+  "module": "WellFounded",
+  "sig": "theorem pred_inter_range_nonempty {\u03c1 : X \u2192 X \u2192 Prop} {a : Nat \u2192 X}\n    (hd : InfDesc \u03c1 a) :\n    \u2200 x, x \u2208 range a \u2192 \u2203 y, y \u2208 predR \u03c1 x \u2229 range a",
+  "body": "intro x hx\n  obtain \u27e8n, hn\u27e9 := hx\n  have hpred : \u03c1 (a (n+1)) (a n) := hd n\n  have hmem : a (n+1) \u2208 range a := \u27e8n+1, rfl\u27e9\n  rw[hn] at hpred\n  exact \u27e8a (n+1), \u27e8hpred, hmem\u27e9\u27e9",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.range"
+  ],
+  "axioms": [],
+  "line": 67
+ },
+ {
+  "full": "LogicInduction.pred_inter_range_ne_empty",
+  "name": "pred_inter_range_ne_empty",
+  "kind": "theorem",
+  "module": "WellFounded",
+  "sig": "theorem pred_inter_range_ne_empty {\u03c1 : X \u2192 X \u2192 Prop} {a : Nat \u2192 X}\n    (hd : InfDesc \u03c1 a) :\n    \u2200 x, x \u2208 range a \u2192 predR \u03c1 x \u2229 range a \u2260 \u2205",
+  "body": "intro x hx hxx\n  obtain \u27e8y, hy\u27e9 := pred_inter_range_nonempty hd x hx\n  rw [hxx] at hy\n  exact nothing_empty hy",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.nothing_empty",
+   "LogicInduction.pred_inter_range_nonempty"
+  ],
+  "axioms": [],
+  "line": 77
+ },
+ {
+  "full": "LogicInduction.ind_imp_no_desc",
+  "name": "ind_imp_no_desc",
+  "kind": "theorem",
+  "module": "WellFounded",
+  "sig": "theorem ind_imp_no_desc {\u03c1 : X \u2192 X \u2192 Prop}\n    (h : \u2200 A : Set X, IndPrinciple \u03c1 A) : \u00ac \u2203 a, InfDesc \u03c1 a",
+  "body": "intro hex\n  obtain \u27e8a, ha\u27e9 := hex\n  have hstep : \u2200 x, x \u2208 range a \u2192 predR \u03c1 x \u2229 range a \u2286 \u2205 \u2192 False := by\n    intro x hx hsub\n    exfalso\n    exact pred_inter_range_ne_empty ha x hx (subset_antisymm hsub empty_subset)\n  have heq : \u2205 = range a := h (range a) \u2205 empty_subset hstep\n  obtain \u27e8x, hx\u27e9 := range_nonempty a\n  rw [\u2190 heq] at hx\n  exact nothing_empty hx",
+  "doc": "(ii) \u2192 (iii)",
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.empty_subset",
+   "LogicInduction.Set.nothing_empty",
+   "LogicInduction.Set.predR",
+   "LogicInduction.Set.range",
+   "LogicInduction.Set.subset_antisymm",
+   "LogicInduction.pred_inter_range_ne_empty",
+   "LogicInduction.range_nonempty"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 86
+ },
+ {
+  "full": "LogicInduction.ind_imp_no_desc'",
+  "name": "ind_imp_no_desc'",
+  "kind": "theorem",
+  "module": "WellFounded",
+  "sig": "theorem ind_imp_no_desc' {\u03c1 : X \u2192 X \u2192 Prop}\n    (h : \u2200 A : Set X, IndPrinciple \u03c1 A) : \u00ac \u2203 a, InfDesc \u03c1 a",
+  "body": "intro hex\n  obtain \u27e8a, ha\u27e9 := hex\n  let A := range a\n  specialize h A\n  simp[InfDesc] at ha\n  have hstep : \u2200 x, x \u2208 A \u2192 (predR \u03c1 x \u2229 A \u2286 \u2205 \u2192 False) := by\n    intro x hx hsub\n    exfalso\n    apply pred_inter_range_ne_empty ha x hx\n    apply subset_antisymm\n    \u00b7 assumption\n    \u00b7 exact empty_subset\n  have hh := (h \u2205 (empty_subset) hstep)\n  have h' := range_nonempty a\n  have : range a = A := rfl\n  rw[this, \u2190 hh] at h'\n  obtain \u27e8x, hx\u27e9 := h'\n  apply nothing_empty\n  assumption",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.InfDesc",
+   "LogicInduction.Set.empty_subset",
+   "LogicInduction.Set.nothing_empty",
+   "LogicInduction.Set.predR",
+   "LogicInduction.Set.range",
+   "LogicInduction.Set.subset_antisymm",
+   "LogicInduction.pred_inter_range_ne_empty",
+   "LogicInduction.range_nonempty"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 99
+ },
+ {
+  "full": "LogicInduction.not_wf_imp_closed_set",
+  "name": "not_wf_imp_closed_set",
+  "kind": "theorem",
+  "module": "WellFounded",
+  "sig": "theorem not_wf_imp_closed_set {\u03c1 : X \u2192 X \u2192 Prop} (h : \u00ac WF \u03c1) :\n    \u2203 B : Set X, (\u2203 x, x \u2208 B) \u2227 \u2200 x, x \u2208 B \u2192 \u2203 y, y \u2208 B \u2227 \u03c1 y x",
+  "body": "simp[WF] at h\n  obtain \u27e8B, h\u27e9 := h\n  exists B\n  obtain \u27e8h1, h2\u27e9 := h\n  constructor\n  \u00b7 exact h1\n  \u00b7 intro x hx\n    specialize h2 x hx\n    have hh : (predR \u03c1 x \u2229 B \u2260 \u2205) \u2192 (\u2203y, y \u2208  predR \u03c1 x \u2229 B) := by\n      intro hh1\n      by_cases H : \u2203 y, y \u2208 predR \u03c1 x \u2229 B\n      \u00b7 assumption\n      \u00b7 simp at H\n        have : (predR \u03c1 x \u2229 B) = \u2205 := by apply ext; simp; assumption\n        rw[this]\n        contradiction\n    specialize hh h2\n    obtain \u27e8y, hy1, hy2\u27e9 := hh\n    exists y",
+  "doc": "\u00ac WF gives a nonempty B in which every element has a \u03c1-predecessor in B.",
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.ext",
+   "LogicInduction.Set.predR",
+   "LogicInduction.WF"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 122
+ },
+ {
+  "full": "LogicInduction.not_wf_of_closed_set",
+  "name": "not_wf_of_closed_set",
+  "kind": "theorem",
+  "module": "WellFounded",
+  "sig": "theorem not_wf_of_closed_set {\u03c1 : X \u2192 X \u2192 Prop} {B : Set X}\n    (hne : \u2203 x, x \u2208 B) (hB : \u2200 x, x \u2208 B \u2192 \u2203 y, y \u2208 B \u2227 \u03c1 y x) : \u00ac WF \u03c1",
+  "body": "intro h\n  have \u27e8x, hx1, hx2\u27e9 := h B hne\n  have \u27e8y, hy, hyx\u27e9:= hB x hx1\n  have : y \u2208 predR \u03c1 x \u2229 B := \u27e8hyx, hy\u27e9\n  rw[hx2] at this\n  contradiction",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.predR"
+  ],
+  "axioms": [],
+  "line": 144
+ },
+ {
+  "full": "LogicInduction.exists_step",
+  "name": "exists_step",
+  "kind": "theorem",
+  "module": "WellFounded",
+  "sig": "theorem exists_step {\u03c1 : X \u2192 X \u2192 Prop} {B : Set X}\n    (hB : \u2200 x, x \u2208 B \u2192 \u2203 y, y \u2208 B \u2227 \u03c1 y x) :\n    \u2203 f : {x // x \u2208 B} \u2192 {x // x \u2208 B}, \u2200 x, \u03c1 (f x).1 x.1",
+  "body": "let \u03c1' : {x // x \u2208 B} \u2192 {x // x \u2208 B} \u2192 Prop := fun x y => \u03c1 y.1 x.1\n  have : (\u2203 f : {x // x \u2208 B} \u2192 {x // x \u2208 B}, \u2200 (x : { x // x \u2208 B }), \u03c1 (f x).1 x.1) = (\u2203 f : {x // x \u2208 B} \u2192 {x // x \u2208 B}, \u2200 (x : { x // x \u2208 B }), \u03c1' x (f x)) := by rfl\n  rw[this]\n  apply Classical.axiomOfChoice\n  intro x\n  let h := hB x.1 x.2\n  obtain \u27e8y, hy1, hy2\u27e9 := h\n  exists \u27e8y, hy1\u27e9",
+  "doc": "A step function on B choosing a predecessor.",
+  "notes": null,
+  "deps": [],
+  "axioms": [
+   "Classical.choice"
+  ],
+  "line": 154
+ },
+ {
+  "full": "LogicInduction.iter",
+  "name": "iter",
+  "kind": "def",
+  "module": "WellFounded",
+  "sig": "def iter {\u03b1 : Type} (f : \u03b1 \u2192 \u03b1) (x\u2080 : \u03b1) : Nat \u2192 \u03b1\n  | 0 => x\u2080\n  | n+1 => f (iter f x\u2080 n)",
+  "body": "",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 166
+ },
+ {
+  "full": "LogicInduction.not_wf_imp_desc",
+  "name": "not_wf_imp_desc",
+  "kind": "theorem",
+  "module": "WellFounded",
+  "sig": "theorem not_wf_imp_desc {\u03c1 : X \u2192 X \u2192 Prop} (h : \u00ac WF \u03c1) :\n    \u2203 a, InfDesc \u03c1 a",
+  "body": "let hh := (not_wf_imp_closed_set h)\n  obtain \u27e8B, Bx, hh\u27e9 := hh\n  let h1 := exists_step hh\n  obtain \u27e8f, fh\u27e9 := h1\n  obtain \u27e8x\u2080, hx\u2080\u27e9 := Bx\n  let a' : Nat \u2192 { x // x \u2208 B } := iter f \u27e8x\u2080, hx\u2080\u27e9\n  let a := fun n => (a' n).1\n  exists a\n  intro n\n  exact fh (a' n)",
+  "doc": "(iii) \u2192 (i), contrapositive form",
+  "notes": null,
+  "deps": [
+   "LogicInduction.exists_step",
+   "LogicInduction.iter",
+   "LogicInduction.not_wf_imp_closed_set"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 171
+ },
+ {
+  "full": "LogicInduction.not_desc_imp_wf",
+  "name": "not_desc_imp_wf",
+  "kind": "theorem",
+  "module": "WellFounded",
+  "sig": "theorem not_desc_imp_wf {\u03c1 : X \u2192 X \u2192 Prop} : (\u00ac \u2203 a, InfDesc \u03c1 a) \u2192 WF \u03c1",
+  "body": "intro h\n  apply Classical.byContradiction\n  intro hh\n  have h' := not_wf_imp_desc hh\n  contradiction",
+  "doc": "(iii) \u2192 (i)",
+  "notes": null,
+  "deps": [
+   "LogicInduction.not_wf_imp_desc"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 185
+ },
+ {
+  "full": "LogicInduction.wf_equiv",
+  "name": "wf_equiv",
+  "kind": "theorem",
+  "module": "WellFounded",
+  "sig": "theorem wf_equiv (\u03c1 : X \u2192 X \u2192 Prop) :\n    (WF \u03c1 \u2194 \u2200 A, IndPrinciple \u03c1 A) \u2227 (WF \u03c1 \u2194 \u00ac \u2203 a, InfDesc \u03c1 a)",
+  "body": "constructor\n  \u00b7 constructor\n    \u00b7 exact wf_imp_ind\n    \u00b7 exact fun h => not_desc_imp_wf (ind_imp_no_desc h)\n  \u00b7 constructor\n    \u00b7 exact fun h => ind_imp_no_desc (wf_imp_ind h)\n    \u00b7 exact not_desc_imp_wf",
+  "doc": "Theorem: the following are equivalent for a relation \u03c1.",
+  "notes": null,
+  "deps": [
+   "LogicInduction.ind_imp_no_desc",
+   "LogicInduction.not_desc_imp_wf",
+   "LogicInduction.wf_imp_ind"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 193
+ },
+ {
+  "full": "LogicInduction.WFOn",
+  "name": "WFOn",
+  "kind": "def",
+  "module": "WellFounded",
+  "sig": "def WFOn (\u03c1 : X \u2192 X \u2192 Prop) (A : Set X) : Prop",
+  "body": "\u2200 B : Set X, B \u2286 A \u2192 (\u2203 x, x \u2208 B) \u2192 \u2203 x, x \u2208 B \u2227 predR \u03c1 x \u2229 B = \u2205",
+  "doc": "Notes: \u03c1 is w.f. on A.",
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set",
+   "LogicInduction.Set.predR"
+  ],
+  "axioms": [],
+  "line": 204
+ },
+ {
+  "full": "LogicInduction.predR_eq_empty_of_not_mem_range",
+  "name": "predR_eq_empty_of_not_mem_range",
+  "kind": "theorem",
+  "module": "WellFounded",
+  "sig": "theorem predR_eq_empty_of_not_mem_range {\u03c1 : X \u2192 X \u2192 Prop} {x : X}\n    (h : \u00ac x \u2208 RelRange \u03c1) : predR \u03c1 x = \u2205",
+  "body": "apply ext\n  intro a\n  constructor\n  \u00b7 intro h'\n    exfalso\n    apply h\n    exists a\n  \u00b7 intro _\n    contradiction",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.ext"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 207
+ },
+ {
+  "full": "LogicInduction.wf_iff_wfOn_range",
+  "name": "wf_iff_wfOn_range",
+  "kind": "theorem",
+  "module": "WellFounded",
+  "sig": "theorem wf_iff_wfOn_range (\u03c1 : X \u2192 X \u2192 Prop) : WF \u03c1 \u2194 WFOn \u03c1 (RelRange \u03c1)",
+  "body": "constructor\n  \u00b7 intro h\n    intro B _\n    exact h B\n  \u00b7 intro h B\n    by_cases hout : \u2203 x, x \u2208 B \u2227 \u00ac x \u2208 RelRange \u03c1\n    \u00b7 intro hh\n      obtain \u27e8x, hx1, hx2\u27e9 := hout\n      exists x\n      constructor\n      \u00b7 assumption\n      \u00b7 have h := predR_eq_empty_of_not_mem_range hx2\n        rw[h]\n        simp\n    \u00b7 simp at hout\n      have h' := h B hout\n      assumption",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.RelRange",
+   "LogicInduction.predR_eq_empty_of_not_mem_range"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 219
+ },
+ {
+  "full": "LogicInduction.ind_range_imp_wfOn",
+  "name": "ind_range_imp_wfOn",
+  "kind": "theorem",
+  "module": "WellFounded",
+  "sig": "theorem ind_range_imp_wfOn {\u03c1 : X \u2192 X \u2192 Prop} :\n    IndPrinciple \u03c1 (RelRange \u03c1) \u2192 WFOn \u03c1 (RelRange \u03c1)",
+  "body": "intro h B hB hne\n  apply Classical.byContradiction\n  intro hno\n  have hstep : \u2200 x, x \u2208 RelRange \u03c1 \u2192\n    predR \u03c1 x \u2229 RelRange \u03c1 \u2286 RelRange \u03c1 \\ B \u2192 x \u2208 RelRange \u03c1 \\ B := by\n    intro x Rx hx\n    by_cases h' : x \u2208 B\n    \u00b7 have hne' : predR \u03c1 x \u2229 B \u2260 \u2205 := fun hempty => hno \u27e8x, h', hempty\u27e9\n      obtain \u27e8y, hy1, hy2\u27e9 := exists_mem_of_ne_empty hne'\n      have hyR := hB y hy2\n      have hhh := hx y \u27e8hy1, hyR\u27e9\n      exfalso\n      exact hhh.2 hy2\n    \u00b7 exact \u27e8Rx, h'\u27e9\n  have heq : RelRange \u03c1 \\ B = RelRange \u03c1 := h (RelRange \u03c1 \\ B) sdiff_subset hstep\n  obtain \u27e8x, hx\u27e9 := hne\n  have hn := hB x hx\n  exact (heq \u25b8 hn).2 hx",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.RelRange",
+   "LogicInduction.Set.exists_mem_of_ne_empty",
+   "LogicInduction.Set.predR",
+   "LogicInduction.Set.sdiff_subset"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 238
+ },
+ {
+  "full": "LogicInduction.ind_iff_ind_range",
+  "name": "ind_iff_ind_range",
+  "kind": "theorem",
+  "module": "WellFounded",
+  "sig": "theorem ind_iff_ind_range (\u03c1 : X \u2192 X \u2192 Prop) :\n    (\u2200 A, IndPrinciple \u03c1 A) \u2194 IndPrinciple \u03c1 (RelRange \u03c1)",
+  "body": "constructor\n  \u00b7 intro h\n    exact h (RelRange \u03c1)\n  \u00b7 intro h\n    apply (wf_equiv \u03c1).1.1\n    apply (wf_iff_wfOn_range \u03c1).2\n    apply ind_range_imp_wfOn\n    assumption",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.RelRange",
+   "LogicInduction.ind_range_imp_wfOn",
+   "LogicInduction.wf_equiv",
+   "LogicInduction.wf_iff_wfOn_range"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 260
+ },
+ {
+  "full": "LogicInduction.wf_of_sub",
+  "name": "wf_of_sub",
+  "kind": "theorem",
+  "module": "WellFounded",
+  "sig": "theorem wf_of_sub {\u03c3 \u03c1 : X \u2192 X \u2192 Prop} (hsub : RelSub \u03c3 \u03c1) (hwf : WF \u03c1) :\n    WF \u03c3",
+  "body": "intro B h\n  have Bwf := hwf B h\n  obtain\u27e8k, Bwf1, Bwf2\u27e9 := Bwf\n  exists k\n  constructor\n  \u00b7 assumption\n  \u00b7 have : \u2200a, a \u2208 predR \u03c3 k \u2192 a \u2208 predR \u03c1 k := by\n      intro a ha\n      simp\n      apply hsub\n      assumption\n    apply ext; intro a\n    constructor\n    \u00b7 intro ha\n      rw[\u2190 Bwf2]\n      constructor\n      \u00b7 apply this\n        exact ha.1\n      \u00b7 exact ha.2\n    \u00b7 intro _\n      contradiction",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.ext",
+   "LogicInduction.Set.predR"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 271
+ },
+ {
+  "full": "LogicInduction.z_not_mem_range",
+  "name": "z_not_mem_range",
+  "kind": "theorem",
+  "module": "SuccWF",
+  "sig": "theorem z_not_mem_range : \u00ac M.z \u2208 RelRange (Rel M)",
+  "body": "intro h\n  obtain \u27e8k, hk\u27e9 := h\n  have := M.h2 k\n  simp[Rel] at hk\n  contradiction",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Rel"
+  ],
+  "axioms": [],
+  "line": 8
+ },
+ {
+  "full": "LogicInduction.eq_of_mem_predR_succ",
+  "name": "eq_of_mem_predR_succ",
+  "kind": "theorem",
+  "module": "SuccWF",
+  "sig": "theorem eq_of_mem_predR_succ (n : N) :\n    \u2200 k, k \u2208 predR (Rel M) (M.S n) \u2192 k = n",
+  "body": "intro k hk\n  simp[Rel] at hk\n  apply M.h1\n  assumption",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Rel"
+  ],
+  "axioms": [
+   "propext"
+  ],
+  "line": 15
+ },
+ {
+  "full": "LogicInduction.succ_ind_range",
+  "name": "succ_ind_range",
+  "kind": "theorem",
+  "module": "SuccWF",
+  "sig": "theorem succ_ind_range (hind : prop11 M) :\n    IndPrinciple (Rel M) (RelRange (Rel M))",
+  "body": "intro B BR Bh\n  apply ext\n  intro a\n  constructor\n  \u00b7 exact BR a\n  \u00b7 intro ha\n    have key : \u2200 m, (m \u2208 RelRange (Rel M) \u2192 m \u2208 B) \u2192 M.S m \u2208 B := by\n      intro m hm\n      apply Bh\n      exists m\n      intro k hk\n      obtain\u27e8hk1, hk2\u27e9 := hk\n      have := eq_of_mem_predR_succ M m k hk1\n      rw[this]\n      apply hm\n      rw[\u2190 this]\n      assumption\n    let C : Set N := fun n \u21a6 M.S n \u2208 B\n    have h := hind C\n    have hh : (M.z \u2208 C \u2227 \u2200 (n : N), n \u2208 C \u2192 M.S n \u2208 C) := by\n      constructor\n      \u00b7 apply key\n        intro h\n        have := z_not_mem_range M h\n        contradiction\n      \u00b7 intro n hn\n        apply key\n        intro hn'\n        assumption\n    have hC := h hh\n    obtain\u27e8k, hk\u27e9 := ha\n    simp[Rel] at hk\n    rw[\u2190 hk]\n    have : k \u2208 C := by rw[hC]; trivial\n    assumption",
+  "doc": "Notes: the principle of S,R_S-induction holds.",
+  "notes": null,
+  "deps": [
+   "LogicInduction.Rel",
+   "LogicInduction.RelRange",
+   "LogicInduction.Set",
+   "LogicInduction.Set.ext",
+   "LogicInduction.eq_of_mem_predR_succ",
+   "LogicInduction.z_not_mem_range"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 23
+ },
+ {
+  "full": "LogicInduction.succ_wf",
+  "name": "succ_wf",
+  "kind": "theorem",
+  "module": "SuccWF",
+  "sig": "theorem succ_wf (hind : prop11 M) : WF (Rel M)",
+  "body": "have := ind_range_imp_wfOn (succ_ind_range M hind)\n  exact (wf_iff_wfOn_range (Rel M)).2 this",
+  "doc": "Notes: S is well founded.",
+  "notes": null,
+  "deps": [
+   "LogicInduction.Rel",
+   "LogicInduction.ind_range_imp_wfOn",
+   "LogicInduction.succ_ind_range",
+   "LogicInduction.wf_iff_wfOn_range"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 63
+ },
+ {
+  "full": "LogicInduction.wf_of_wf_relPlus",
+  "name": "wf_of_wf_relPlus",
+  "kind": "theorem",
+  "module": "WfClosure",
+  "sig": "theorem wf_of_wf_relPlus {\u03c1 : X \u2192 X \u2192 Prop} (h : WF (relPlus \u03c1)) : WF \u03c1",
+  "body": "intro B hB\n  have \u27e8x, _, hx\u27e9 := h B hB\n  exists x\n  constructor\n  \u00b7 assumption\n  \u00b7 have : (predR \u03c1 x) \u2286 (predR (relPlus \u03c1) x) := by\n      intro y hy\n      exists 0, y\n      constructor\n      \u00b7 constructor\n        \u00b7 rfl\n        \u00b7 left; exists x\n      \u00b7 exact hy\n    apply ext; intro a\n    constructor\n    \u00b7 intro ha\n      rw[\u2190 hx]\n      constructor\n      \u00b7 apply this; exact ha.1\n      \u00b7 exact ha.2\n    \u00b7 intro _; contradiction",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.ext",
+   "LogicInduction.Set.predR",
+   "LogicInduction.relPlus"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 9
+ },
+ {
+  "full": "LogicInduction.not_wf_of_not_wf_relPlus",
+  "name": "not_wf_of_not_wf_relPlus",
+  "kind": "theorem",
+  "module": "WfClosure",
+  "sig": "theorem not_wf_of_not_wf_relPlus {\u03c1 : X \u2192 X \u2192 Prop} (h : \u00ac WF (relPlus \u03c1)) :\n    \u00ac WF \u03c1",
+  "body": "obtain \u27e8a, ha\u27e9 := not_wf_imp_desc h\n  let A : Set X := fun x =>\n    x \u2208 RelDomain (relPlus \u03c1) \u2227 \u2203 n, relStar \u03c1 (a (n+1)) x \u2227 relStar \u03c1 x (a n)\n  have hne : \u2203 x, x \u2208 A := by\n    exists (a 1)\n    constructor\n    \u00b7 exists (a 0)\n      exact ha 0\n    \u00b7 exists 1\n      constructor\n      \u00b7 apply relPlus_imp_relStar\n        exact ha 1\n      \u00b7 exists 0\n        constructor\n        \u00b7 rfl\n        \u00b7 have \u27e8k, l, _,_\u27e9:= ha 1\n          right\n          exists l\n  have hstep : \u2200 x, x \u2208 A \u2192 \u2203 y, y \u2208 A \u2227 \u03c1 y x := by\n    intro x \u27e8hx, n, h1, h2\u27e9\n    obtain \u27e8k, hk\u27e9 := h1\n    cases k with\n    | zero =>\n      have \u27e8h, _\u27e9 := hk\n      subst h\n      obtain \u27e8u, hu1, hu2\u27e9 := (relPlus_remark3 (ha (n+1))).1\n      exists u\n      constructor\n      \u00b7 constructor\n        \u00b7 exists (a (n+1))\n          exact relSub_relPlus \u03c1 u (a (n+1)) hu2\n        \u00b7 exists (n+1)\n          exact \u27e8hu1, relSub_relStar \u03c1 u (a (n+1)) hu2\u27e9\n      \u00b7 exact hu2\n    | succ m =>\n      have \u27e8y, hk1, hk2\u27e9 := hk\n      exists y\n      constructor\n      \u00b7 constructor\n        \u00b7 exists x, 0, y\n          constructor\n          \u00b7 constructor\n            \u00b7 rfl\n            \u00b7 left\n              exists x\n          \u00b7 assumption\n        \u00b7 exists n\n          constructor\n          \u00b7 exists m\n          \u00b7 obtain \u27e8l, hl\u27e9 := h2\n            exists (l + 1)\n            rw[Nat.add_comm, relPow_add \u03c1 1 l]\n            exists x\n            constructor\n            \u00b7 rw[relPow_one]; assumption\n            \u00b7 assumption\n      \u00b7 assumption\n  exact not_wf_of_closed_set hne hstep",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.RelDomain",
+   "LogicInduction.Set",
+   "LogicInduction.not_wf_imp_desc",
+   "LogicInduction.not_wf_of_closed_set",
+   "LogicInduction.relPlus",
+   "LogicInduction.relPlus_imp_relStar",
+   "LogicInduction.relPlus_remark3",
+   "LogicInduction.relPow_add",
+   "LogicInduction.relPow_one",
+   "LogicInduction.relStar",
+   "LogicInduction.relSub_relPlus",
+   "LogicInduction.relSub_relStar"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 32
+ },
+ {
+  "full": "LogicInduction.claim_star_I",
+  "name": "claim_star_I",
+  "kind": "theorem",
+  "module": "WfClosure",
+  "sig": "theorem claim_star_I {\u03c1 : X \u2192 X \u2192 Prop} (h : \u00ac WF (relPlus \u03c1)) :\n    \u00ac WF \u03c1",
+  "body": "obtain \u27e8a, ha\u27e9 := not_wf_imp_desc h\n  let B : Set X := fun x => \u2203 k, relStar \u03c1 (a k) x\n  have hne : \u2203 x, x \u2208 B := by\n    exists (a 0), 0, 0\n    constructor\n    \u00b7 rfl\n    \u00b7 right\n      have \u27e8k, y, hk1, hk2\u27e9 := ha 0\n      exists y\n  have hstep : \u2200 x, x \u2208 B \u2192 \u2203 y, y \u2208 B \u2227 \u03c1 y x := by\n    intro x hx\n    obtain \u27e8k, n, hn1\u27e9:= hx\n    cases n with\n    | zero =>\n      obtain\u27e8h, haa\u27e9 := hn1\n      have \u27e8l, y, hk\u27e9 := ha k\n      rw[\u2190 h]\n      exists y\n      constructor\n      \u00b7 exists (k + 1)\n        exists l\n        exact hk.1\n      \u00b7 exact hk.2\n    | succ n =>\n      obtain\u27e8w, hw\u27e9 := hn1\n      exists w\n      constructor\n      \u00b7 exists k, n\n        exact hw.1\n      \u00b7 exact hw.2\n  exact not_wf_of_closed_set hne hstep",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set",
+   "LogicInduction.not_wf_imp_desc",
+   "LogicInduction.not_wf_of_closed_set",
+   "LogicInduction.relStar"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 93
+ },
+ {
+  "full": "LogicInduction.claim_star_II",
+  "name": "claim_star_II",
+  "kind": "theorem",
+  "module": "WfClosure",
+  "sig": "theorem claim_star_II {\u03c1 : X \u2192 X \u2192 Prop} (h : \u00ac WF (relPlus \u03c1)) : \u00ac WF \u03c1",
+  "body": "obtain \u27e8C, hCne, hC\u27e9 := not_wf_imp_closed_set h\n  let E : Set X := fun x => \u2203 c, c \u2208 C \u2227 relStar \u03c1 c x\n  have hEne : \u2203 x, x \u2208 E := by\n    obtain \u27e8c, hc\u27e9 := hCne\n    have \u27e8c', hc'1, hc'2\u27e9 := hC c hc\n    exists c, c'\n    constructor\n    \u00b7 assumption\n    \u00b7 apply relPlus_imp_relStar\n      assumption\n  have hE : \u2200 y, y \u2208 E \u2192 \u2203 u, u \u2208 E \u2227 \u03c1 u y := by\n    intro y \u27e8c, hc1, hcy\u27e9\n    obtain \u27e8c', hc'1, hc'2\u27e9 := hC c hc1\n    have h3 : relPlus \u03c1 c' y :=\n      remark2_iii \u03c1 .plus .star (Or.inl trivial) c' c y hc'2 hcy\n    obtain \u27e8u, hu1, hu2\u27e9 := (relPlus_remark3 h3).1\n    exact \u27e8u, \u27e8c', hc'1, hu1\u27e9, hu2\u27e9\n  exact not_wf_of_closed_set hEne hE",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set",
+   "LogicInduction.not_wf_imp_closed_set",
+   "LogicInduction.not_wf_of_closed_set",
+   "LogicInduction.relPlus",
+   "LogicInduction.relPlus_imp_relStar",
+   "LogicInduction.relPlus_remark3",
+   "LogicInduction.relStar",
+   "LogicInduction.remark2_iii"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 127
+ },
+ {
+  "full": "LogicInduction.wf_relPlus_iff",
+  "name": "wf_relPlus_iff",
+  "kind": "theorem",
+  "module": "WfClosure",
+  "sig": "theorem wf_relPlus_iff (\u03c1 : X \u2192 X \u2192 Prop) : WF \u03c1 \u2194 WF (relPlus \u03c1)",
+  "body": "constructor\n  \u00b7 exact fun p => Classical.byContradiction fun q => not_wf_of_not_wf_relPlus q p\n  \u00b7 exact wf_of_wf_relPlus",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.not_wf_of_not_wf_relPlus",
+   "LogicInduction.wf_of_wf_relPlus"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 147
+ },
+ {
+  "full": "LogicInduction.natPeano",
+  "name": "natPeano",
+  "kind": "def",
+  "module": "NatOrder",
+  "sig": "def natPeano : PeanoLike Nat where\n  z",
+  "body": "0\n  S := Nat.succ\n  h1 := by intro x y hxy; apply Nat.succ_inj.1; assumption\n  h2 := Nat.succ_ne_zero\n  h3 := by intro n; cases n with | zero => left; rfl | succ n => right; exists n",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [
+   "propext"
+  ],
+  "line": 8
+ },
+ {
+  "full": "LogicInduction.natPeano_ind",
+  "name": "natPeano_ind",
+  "kind": "theorem",
+  "module": "NatOrder",
+  "sig": "theorem natPeano_ind : prop11 natPeano",
+  "body": "intro B hB\n  apply ext\n  intro n\n  constructor\n  \u00b7 intro hn\n    trivial\n  \u00b7 intro hn\n    induction n with\n    | zero => exact hB.1\n    | succ n hnn => exact hB.2 n (hnn hn)",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.ext"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 15
+ },
+ {
+  "full": "LogicInduction.relPow_nat",
+  "name": "relPow_nat",
+  "kind": "theorem",
+  "module": "NatOrder",
+  "sig": "theorem relPow_nat (n x y : Nat) :\n    relPow (Rel natPeano) n x y \u2194 x + n = y",
+  "body": "constructor\n  \u00b7 revert x y\n    induction n with\n    | zero =>\n      intro x y hxy\n      obtain \u27e8h, hh\u27e9 := hxy\n      omega\n    | succ n hn =>\n      intro x y hxy\n      obtain \u27e8k, hk1, hk2\u27e9 := hxy\n      have := hn x k hk1\n      have hk2' : Nat.succ k = y := hk2\n      omega\n  \u00b7 revert x y\n    induction n with\n    | zero =>\n      intro x y hxy\n      constructor\n      \u00b7 omega\n      \u00b7 left; exists (Nat.succ x)\n    | succ k hk =>\n      intro x y hxy\n      rw[\u2190 hxy]\n      exists (x + k)\n      constructor\n      \u00b7 apply hk\n        rfl\n      \u00b7 trivial",
+  "doc": "\u03c1^n for the successor relation is \"add n\".",
+  "notes": null,
+  "deps": [],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 28
+ },
+ {
+  "full": "LogicInduction.relStar_nat",
+  "name": "relStar_nat",
+  "kind": "theorem",
+  "module": "NatOrder",
+  "sig": "theorem relStar_nat (x y : Nat) : relStar (Rel natPeano) x y \u2194 x \u2264 y",
+  "body": "constructor\n  \u00b7 intro \u27e8k, hk\u27e9\n    have := (relPow_nat k x y).1 hk\n    omega\n  \u00b7 intro h\n    have \u27e8k, hk\u27e9 := Nat.le.dest h\n    exists k\n    exact (relPow_nat k x y).2 hk",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.relPow_nat"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 59
+ },
+ {
+  "full": "LogicInduction.relPlus_nat",
+  "name": "relPlus_nat",
+  "kind": "theorem",
+  "module": "NatOrder",
+  "sig": "theorem relPlus_nat (x y : Nat) : relPlus (Rel natPeano) x y \u2194 x < y",
+  "body": "constructor\n  \u00b7 intro \u27e8k, l, hkl, hly\u27e9\n    have := (relPow_nat k x l).1 hkl\n    have : (x + k).succ = l.succ := by omega\n    have hyl : y = l.succ := by exact hly.symm\n    omega\n  \u00b7 intro hxy\n    have : \u2203k : Nat, x.succ + k = y := by exact Nat.le.dest hxy\n    obtain \u27e8k, hk\u27e9 := this\n    have : x + k.succ = y := by omega\n    have := (relPow_nat k.succ x y).2 this\n    exists k",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.relPow_nat"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 69
+ },
+ {
+  "full": "LogicInduction.lt_wf",
+  "name": "lt_wf",
+  "kind": "theorem",
+  "module": "NatOrder",
+  "sig": "theorem lt_wf : WF (fun x y : Nat => x < y)",
+  "body": "have : relPlus (Rel natPeano) = (fun x y : Nat => x < y) := by\n    ext x y\n    exact relPlus_nat x y\n  rw[\u2190 this]\n  apply (wf_relPlus_iff (Rel natPeano)).mp ?_\n  exact  succ_wf natPeano natPeano_ind",
+  "doc": "The sheet's corollary: `<` is well founded.",
+  "notes": null,
+  "deps": [
+   "LogicInduction.Rel",
+   "LogicInduction.Set.ext",
+   "LogicInduction.natPeano",
+   "LogicInduction.natPeano_ind",
+   "LogicInduction.relPlus",
+   "LogicInduction.relPlus_nat",
+   "LogicInduction.succ_wf",
+   "LogicInduction.wf_relPlus_iff"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 84
+ },
+ {
+  "full": "LogicInduction.course_of_values",
+  "name": "course_of_values",
+  "kind": "theorem",
+  "module": "NatOrder",
+  "sig": "theorem course_of_values (B : Set Nat)\n    (h : \u2200 n, (\u2200 k, k < n \u2192 k \u2208 B) \u2192 n \u2208 B) : B = univ",
+  "body": "have := (wf_equiv (fun x y : Nat => x < y)).1.1 lt_wf univ\n  apply this\n  intro n Bn\n  trivial\n  intro n _ hn\n  have := h n\n  apply this; intro k hk\n  exact hn k \u27e8hk, trivial\u27e9",
+  "doc": "Course of values induction.",
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.univ",
+   "LogicInduction.lt_wf",
+   "LogicInduction.wf_equiv"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 93
+ },
+ {
+  "full": "LogicInduction.IrreflRel",
+  "name": "IrreflRel",
+  "kind": "def",
+  "module": "WellOrder",
+  "sig": "def IrreflRel (\u03c1 : X \u2192 X \u2192 Prop) : Prop",
+  "body": "\u2200 x, \u00ac \u03c1 x x",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 10
+ },
+ {
+  "full": "LogicInduction.StrictPO",
+  "name": "StrictPO",
+  "kind": "def",
+  "module": "WellOrder",
+  "sig": "def StrictPO (\u03c1 : X \u2192 X \u2192 Prop) : Prop",
+  "body": "IrreflRel \u03c1 \u2227 TransRel \u03c1",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.IrreflRel",
+   "LogicInduction.TransRel"
+  ],
+  "axioms": [],
+  "line": 12
+ },
+ {
+  "full": "LogicInduction.Smallest",
+  "name": "Smallest",
+  "kind": "def",
+  "module": "WellOrder",
+  "sig": "def Smallest (\u03c1 : X \u2192 X \u2192 Prop) (B : Set X) (x : X) : Prop",
+  "body": "x \u2208 B \u2227 \u2200 y, y \u2208 B \u2192 x = y \u2228 \u03c1 x y",
+  "doc": "x is a smallest element of B for \u03c1.",
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 15
+ },
+ {
+  "full": "LogicInduction.WellOrder",
+  "name": "WellOrder",
+  "kind": "def",
+  "module": "WellOrder",
+  "sig": "def WellOrder (\u03c1 : X \u2192 X \u2192 Prop) : Prop",
+  "body": "\u2200 B : Set X, B \u2286 Field \u03c1 \u2192 (\u2203 x, x \u2208 B) \u2192 \u2203 x, Smallest \u03c1 B x",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Field",
+   "LogicInduction.Set",
+   "LogicInduction.Smallest"
+  ],
+  "axioms": [],
+  "line": 18
+ },
+ {
+  "full": "LogicInduction.range_sub_field",
+  "name": "range_sub_field",
+  "kind": "theorem",
+  "module": "WellOrder",
+  "sig": "theorem range_sub_field (\u03c1 : X \u2192 X \u2192 Prop) : RelRange \u03c1 \u2286 Field \u03c1",
+  "body": "intro x \u27e8y, hx\u27e9\n  right\n  exists y",
+  "doc": null,
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 21
+ },
+ {
+  "full": "LogicInduction.wo_imp_wfOn_field",
+  "name": "wo_imp_wfOn_field",
+  "kind": "theorem",
+  "module": "WellOrder",
+  "sig": "theorem wo_imp_wfOn_field {\u03c1 : X \u2192 X \u2192 Prop} (hs : StrictPO \u03c1) (hw : WellOrder \u03c1) :\n    WFOn \u03c1 (Field \u03c1)",
+  "body": "intro B h hB\n  have \u27e8x, hx1, hx2\u27e9 := hw B h hB\n  exists x\n  constructor\n  \u00b7 assumption\n  \u00b7 apply ext\n    intro y\n    constructor\n    \u00b7 intro \u27e8hy1, hy2\u27e9\n      have := hx2 y hy2\n      cases this\n      \u00b7 rename_i hh\n        have hy1' : \u03c1 y x := hy1\n        rw[hh] at hy1'\n        have := hs.1 y hy1'\n        contradiction\n      . rename_i hh\n        have hy1' : \u03c1 y x := hy1\n        have hxx : \u03c1 x x := hs.2 x y x hh hy1'\n        have := hs.1 x hxx\n        contradiction\n    \u00b7 intro _\n      contradiction",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.ext"
+  ],
+  "axioms": [
+   "propext",
+   "Quot.sound"
+  ],
+  "line": 26
+ },
+ {
+  "full": "LogicInduction.wo_imp_wf",
+  "name": "wo_imp_wf",
+  "kind": "theorem",
+  "module": "WellOrder",
+  "sig": "theorem wo_imp_wf {\u03c1 : X \u2192 X \u2192 Prop} (hs : StrictPO \u03c1) (hw : WellOrder \u03c1) :\n    WF \u03c1",
+  "body": "apply (wf_iff_wfOn_range \u03c1).2\n  intro B h Bh\n  have : B \u2286 Field \u03c1 := fun b hh => (range_sub_field \u03c1 b) (h b hh)\n  exact wo_imp_wfOn_field hs hw B this Bh",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Field",
+   "LogicInduction.range_sub_field",
+   "LogicInduction.wf_iff_wfOn_range",
+   "LogicInduction.wo_imp_wfOn_field"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 52
+ },
+ {
+  "full": "LogicInduction.LinearRel",
+  "name": "LinearRel",
+  "kind": "def",
+  "module": "WellOrder",
+  "sig": "def LinearRel (\u03c1 : X \u2192 X \u2192 Prop) : Prop",
+  "body": "\u2200 x y, x = y \u2228 \u03c1 x y \u2228 \u03c1 y x",
+  "doc": "Notes: \u03c1 is linear (any two elements are comparable).",
+  "notes": null,
+  "deps": [],
+  "axioms": [],
+  "line": 60
+ },
+ {
+  "full": "LogicInduction.wf_imp_wo",
+  "name": "wf_imp_wo",
+  "kind": "theorem",
+  "module": "WellOrder",
+  "sig": "theorem wf_imp_wo {\u03c1 : X \u2192 X \u2192 Prop} (hl : LinearRel \u03c1) (hw : WF \u03c1) :\n    WellOrder \u03c1",
+  "body": "intro B Bh Bh'\n  have \u27e8x, hx1, hx2\u27e9 := hw B Bh'\n  exists x\n  constructor\n  \u00b7 assumption\n  \u00b7 intro y hy\n    cases hl x y\n    \u00b7 left; assumption\n    \u00b7 rename_i h\n      cases h\n      \u00b7 right; assumption\n      \u00b7 rename_i h; have : y \u2208 predR \u03c1 x \u2229 B := \u27e8h, hy\u27e9\n        rw[hx2] at this\n        contradiction",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Set.predR"
+  ],
+  "axioms": [],
+  "line": 62
+ },
+ {
+  "full": "LogicInduction.not_wf_imp_wo",
+  "name": "not_wf_imp_wo",
+  "kind": "theorem",
+  "module": "WellOrder",
+  "sig": "theorem not_wf_imp_wo :\n    \u00ac \u2200 \u03c1 : Nat \u2192 Nat \u2192 Prop, StrictPO \u03c1 \u2192 WF \u03c1 \u2192 WellOrder \u03c1",
+  "body": "intro h\n  let \u03c1 : Nat \u2192 Nat \u2192 Prop := fun x y => x = 0 \u2227 (y = 1 \u2228 y = 2)\n  have h1 : StrictPO \u03c1 := by\n    constructor\n    \u00b7 intro x \u27e8hx1, hx2\u27e9\n      cases hx2\n      \u00b7 omega\n      \u00b7 omega\n    \u00b7 intro x y z \u27e8hxy1, _\u27e9  \u27e8_, hyz2\u27e9\n      constructor\n      \u00b7 assumption\n      \u00b7 assumption\n  have h2 : WF \u03c1 := by\n    intro B \u27e8x, hx\u27e9\n    by_cases h : 0 \u2208 B\n    \u00b7 exists 0\n      constructor\n      \u00b7 assumption\n      \u00b7 apply ext; intro y\n        constructor\n        \u00b7 intro \u27e8\u27e8hy1, hy2\u27e9, hy3\u27e9\n          cases hy2; omega; omega\n        \u00b7 intro _; contradiction\n    \u00b7 exists x\n      constructor\n      \u00b7 assumption\n      \u00b7 apply ext; intro y\n        constructor\n        \u00b7 intro \u27e8\u27e8hy1, hy2\u27e9, hy3\u27e9\n          rw[hy1] at hy3\n          contradiction\n        \u00b7 intro _; contradiction\n  have h3 : \u00ac(WellOrder \u03c1) := by\n    intro h\n    let B : Set Nat := fun x => x = 1 \u2228 x = 2\n    have Bh : B \u2286 Field \u03c1 := by\n      intro x hx\n      right\n      exists 0\n    have Bh' : \u2203x, x \u2208 B := \u27e81, Or.inl rfl\u27e9\n    have \u27e8x, \u27e8hx1, hx2\u27e9\u27e9 := h B Bh Bh'\n    cases hx1\n    \u00b7 have := hx2 2 (Or.inr rfl)\n      cases this\n      \u00b7 omega\n      \u00b7 omega\n    \u00b7 have := hx2 1 (Or.inl rfl)\n      cases this\n      \u00b7 omega\n      \u00b7 omega\n  exact h3 (h \u03c1 h1 h2)",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.Field",
+   "LogicInduction.Set",
+   "LogicInduction.Set.ext",
+   "LogicInduction.StrictPO",
+   "LogicInduction.WF",
+   "LogicInduction.WellOrder"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 79
+ },
+ {
+  "full": "LogicInduction.wo_iff_wf",
+  "name": "wo_iff_wf",
+  "kind": "theorem",
+  "module": "WellOrder",
+  "sig": "theorem wo_iff_wf {\u03c1 : X \u2192 X \u2192 Prop} (hs : StrictPO \u03c1) (hl : LinearRel \u03c1) :\n    WellOrder \u03c1 \u2194 WF \u03c1",
+  "body": "\u27e8wo_imp_wf hs, wf_imp_wo hl\u27e9",
+  "doc": null,
+  "notes": null,
+  "deps": [
+   "LogicInduction.wf_imp_wo",
+   "LogicInduction.wo_imp_wf"
+  ],
+  "axioms": [
+   "propext",
+   "Classical.choice",
+   "Quot.sound"
+  ],
+  "line": 133
+ }
+]

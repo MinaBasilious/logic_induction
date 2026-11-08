@@ -7,14 +7,14 @@ The project has no dependencies, not even Mathlib. It defines its own `Set` and 
 ## Contents
 
 - `LogicInduction/Set.lean`: sets as predicates, membership, subset, intersection, difference, `univ`, `range`, and `predR`, which is the notes' `ρ[x]`.
-- `LogicInduction/indN.lean`: Section 1. Peano-like structures and the equivalence of the two induction principles.
+- `LogicInduction/IndN.lean`: Section 1. Peano-like structures and the equivalence of the two induction principles.
 - `LogicInduction/Relations.lean`: relative product, transitivity, powers `ρⁿ`, the closures `ρ⁺` and `ρ*`, and their properties.
 - `LogicInduction/WellFounded.lean`: well-founded relations, the principle of ρ,A-induction, and the equivalence theorem.
 - `LogicInduction/SuccWF.lean`: the successor relation is well founded.
 - `LogicInduction/WfClosure.lean`: ρ is well founded iff ρ⁺ is.
 - `LogicInduction/NatOrder.lean`: `≤ = S*`, `< = S⁺`, and course of values induction on `ℕ`.
 - `LogicInduction/WellOrder.lean`: well orderings and well-foundedness.
-- `docs/Logic_Induction.pdf`: my written proofs, which the Lean code follows.
+- `docs/Logic_Induction.pdf`: my written proofs, which the Lean code follows (not updated).
 
 Each theorem carries a comment with its number in the notes where it has one.
 
@@ -47,6 +47,15 @@ lake build
 ```
 
 No network access is needed after elan has fetched the toolchain.
+
+## Proof Atlas
+
+[`atlas/`](./atlas) contains an interactive companion site that presents every declaration three ways: its informal pen-and-paper proof (transcribed from `docs/Logic_Induction.pdf` [which is not upated; I know]), the exact machine-checked Lean source, and its position in the proof dependency tree. It is a static Next.js site generated from the Lean sources; see [`atlas/README.md`](./atlas/README.md) to run it locally or just access it from [https://MinaBasilious.github.io/logic_induction/](https://MinaBasilious.github.io/logic_induction/).
+
+## Authorship
+
+- The **Lean formalization** (all definitions, theorems and proofs) is entirely human work, designed and written by me (Mina Basilious) and only *checked* by the machine (`lake build`, plus an axiom audit with `#print axioms`: every declaration depends solely on the standard axioms).
+- The **Proof Atlas** website was built with AI assistance; parsing, informal proof transcriptions, and UI. It is a presentation layer over the human-written mathematics; no mathematical statement or proof originates from AI.
 
 ## Source
 
