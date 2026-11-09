@@ -66,7 +66,7 @@ export default function Home() {
               Browse proofs
             </TabsTrigger>
             <TabsTrigger value="graph" className="data-[state=active]:text-emerald-300 data-[state=active]:bg-emerald-500/10 text-slate-400 text-[13px]">
-              Proof tree
+              Dependency graph
             </TabsTrigger>
             <TabsTrigger value="about" className="data-[state=active]:text-emerald-300 data-[state=active]:bg-emerald-500/10 text-slate-400 text-[13px]">
               About

@@ -89,6 +89,7 @@ export function GraphView({ onOpenBrowse }: { onOpenBrowse: (full: string) => vo
         links.push({ source: dep, target: d.full });
       }
     }
+    setRenderLinks(links);
     nodesRef.current = nodes;
     linksRef.current = links;
 
@@ -238,7 +239,8 @@ export function GraphView({ onOpenBrowse }: { onOpenBrowse: (full: string) => vo
           ))}
         </div>
         <p className="mt-1.5 text-[10.5px] text-slate-600 leading-snug">
-          Click a node: <span className="text-emerald-400">emerald</span> = what it needs,{" "}
+          Highlighted arrows point from a dependency to the declaration that uses it. Click a node:{" "}
+          <span className="text-emerald-400"> emerald</span> = what it needs,{" "}
           <span className="text-amber-400">amber</span> = what uses it. Drag to rearrange, scroll
           to zoom.
         </p>
@@ -270,6 +272,19 @@ export function GraphView({ onOpenBrowse }: { onOpenBrowse: (full: string) => vo
         onPointerUp={onPointerUp}
         onPointerLeave={onPointerUp}
       >
+        <defs>
+          <marker
+            id="dependency-arrow"
+            markerWidth="5"
+            markerHeight="6"
+            refX="4.5"
+            refY="3"
+            orient="auto"
+            markerUnits="userSpaceOnUse"
+          >
+            <path d="M0,0 L5,3 L0,6 Z" fill="#34d399" />
+          </marker>
+        </defs>
         <g transform={`translate(${pan.x},${pan.y}) scale(${zoom})`}>
           {/* links */}
           {renderLinks.map((l, i) => {
@@ -284,16 +299,21 @@ export function GraphView({ onOpenBrowse }: { onOpenBrowse: (full: string) => vo
                 (ups.has(s.full) && ups.has(t.full)) ||
                 (downs.has(s.full) && downs.has(t.full));
             }
+            const dx = t.x! - s.x!;
+            const dy = t.y! - s.y!;
+            const distance = Math.hypot(dx, dy) || 1;
+            const endOffset = active ? t.r + 2 : 0;
             return (
               <line
                 key={i}
                 x1={s.x}
                 y1={s.y}
-                x2={t.x}
-                y2={t.y}
-                stroke={active ? "#34d399" : "#334155"}
-                strokeWidth={active ? 1.1 : 0.5}
-                opacity={selected ? (active ? 0.9 : 0.06) : 0.18}
+                x2={t.x! - (dx / distance) * endOffset}
+                y2={t.y! - (dy / distance) * endOffset}
+                stroke={active ? "#34d399" : "#64748b"}
+                strokeWidth={active ? 1.1 : 0.7}
+                opacity={selected ? (active ? 0.9 : 0.06) : 0.3}
+                markerEnd={active ? "url(#dependency-arrow)" : undefined}
               />
             );
           })}
